@@ -111,7 +111,8 @@
 			"sourceIndexes" : 
 			[
 				1,
-				2
+				2,
+				3
 			]
 		}
 	],
@@ -131,6 +132,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "include/conversion/convert.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "include/util/constants.h",
 			"sourceGroupIndex" : 1
 		}
 	],

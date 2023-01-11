@@ -1,18 +1,14 @@
 #ifndef CPP_SP2_ARITHEMETIC_H
 #define CPP_SP2_ARITHEMETIC_H
 
-#include "MPInt.h"
-#include "util/math.h"
-#include "util/validators.h"
-
 #include <cmath>
 #include <sstream>
 
-/**
- * Square root of 64 bit integer.
- */
-//constexpr long long FLOOR_SQRT_LLONG_MAX = 3037000499;
-constexpr long long FLOOR_SQRT_LLONG_MAX = 4294967296;
+#include "MPInt.h"
+#include "util/math.h"
+#include "util/validators.h"
+#include "util/constants.h"
+
 
 /*
  * Algorithmic Time Complexity : O(n)
@@ -49,6 +45,27 @@ MPInt MPInt::operator+(const MPInt &num) const {
 
     return result;
 }
+
+
+MPInt MPInt::operator+(const std::string &num) const {
+    return *this + MPInt(num);
+}
+
+
+MPInt MPInt::operator+(const long long &num) const {
+    return *this + MPInt(num);
+}
+
+
+MPInt operator+(const std::string &lhs, const MPInt &rhs) {
+    return MPInt(lhs) + rhs;
+}
+
+
+MPInt operator+(const long long &lhs, const MPInt &rhs) {
+    return MPInt(lhs) + rhs;
+}
+
 
 /*
  * Algorithmic Time Complexity : O(n)
@@ -113,6 +130,27 @@ MPInt MPInt::operator-(const MPInt &num) const {
     return result;
 }
 
+
+MPInt MPInt::operator-(const std::string &num) const {
+    return *this - MPInt(num);
+}
+
+
+MPInt MPInt::operator-(const long long &num) const {
+    return *this - MPInt(num);
+}
+
+
+MPInt operator-(const std::string &lhs, const MPInt &rhs) {
+    return MPInt(lhs) - rhs;
+}
+
+
+MPInt operator-(const long long &lhs, const MPInt &rhs) {
+    return MPInt(lhs) - rhs;
+}
+
+
 /*
  * Using Karatsuba algorithm for fast multiplication.
  * https://en.wikipedia.org/wiki/Karatsuba_algorithm
@@ -150,7 +188,7 @@ MPInt MPInt::operator*(const MPInt &num) const {
         strip_leading_zeroes(num2_high.value);
         strip_leading_zeroes(num2_low.value);
 
-        // Recursively compute high, low, mid
+        // Recursively compute high-, low- and mid-products
         MPInt prod_high, prod_mid, prod_low;
         prod_high = num1_high * num2_high;
         prod_low = num1_low * num2_low;
@@ -176,11 +214,26 @@ MPInt MPInt::operator*(const MPInt &num) const {
 }
 
 
-/*
- * Algorithmic Time Complexity : O(n^2)
- * Algorithmic Space Complexity : O(n)
- * where n is the larger length of respective strings(Integers) provided.
- */
+MPInt MPInt::operator*(const std::string &num) const {
+    return *this * MPInt(num);
+}
+
+
+MPInt MPInt::operator*(const long long &num) const {
+    return *this * MPInt(num);
+}
+
+
+MPInt operator*(const std::string &lhs, const MPInt &rhs) {
+    return MPInt(lhs) * rhs;
+}
+
+
+MPInt operator*(const long long &lhs, const MPInt &rhs) {
+    return MPInt(lhs) * rhs;
+}
+
+
 std::tuple<MPInt, MPInt> divide(const MPInt &dividend, const MPInt &divisor) {
     MPInt quotient, remainder, temp;
 
@@ -198,7 +251,11 @@ std::tuple<MPInt, MPInt> divide(const MPInt &dividend, const MPInt &divisor) {
     return std::make_tuple(quotient, remainder);
 }
 
-
+/*
+ * Algorithmic Time Complexity : O(n^2)
+ * Algorithmic Space Complexity : O(n)
+ * where n is the larger length of respective strings(Integers) provided.
+ */
 MPInt MPInt::operator/(const MPInt &num) const {
     MPInt abs_dividend = abs(*this);
     MPInt abs_divisor = abs(num);
@@ -217,10 +274,7 @@ MPInt MPInt::operator/(const MPInt &num) const {
         quotient = std::stoll(abs_dividend.value) / std::stoll(abs_divisor.value);
     else if (abs_dividend == abs_divisor)
         quotient = 1;
-    else if (is_power_of_10(abs_divisor.value)) { // if divisor is a power of 10 do optimised calculation
-        size_t digits_in_quotient = abs_dividend.value.size() - abs_divisor.value.size() + 1;
-        quotient.value = abs_dividend.value.substr(0, digits_in_quotient);
-    } else {
+    else {
         quotient.value = "";    // the value is cleared as digits will be appended
         MPInt chunk, chunk_quotient, chunk_remainder;
         size_t chunk_index = 0;
@@ -258,33 +312,8 @@ MPInt MPInt::operator/(const MPInt &num) const {
 }
 
 
-MPInt MPInt::operator+(const long long &num) const {
-    return *this + MPInt(num);
-}
-
-
-MPInt operator+(const long long &lhs, const MPInt &rhs) {
-    return MPInt(lhs) + rhs;
-}
-
-
-MPInt MPInt::operator-(const long long &num) const {
-    return *this - MPInt(num);
-}
-
-
-MPInt operator-(const long long &lhs, const MPInt &rhs) {
-    return MPInt(lhs) - rhs;
-}
-
-
-MPInt MPInt::operator*(const long long &num) const {
-    return *this * MPInt(num);
-}
-
-
-MPInt operator*(const long long &lhs, const MPInt &rhs) {
-    return MPInt(lhs) * rhs;
+MPInt MPInt::operator/(const std::string &num) const {
+    return *this / MPInt(num);
 }
 
 
@@ -293,46 +322,12 @@ MPInt MPInt::operator/(const long long &num) const {
 }
 
 
-MPInt operator/(const long long &lhs, const MPInt &rhs) {
+MPInt operator/(const std::string &lhs, const MPInt &rhs) {
     return MPInt(lhs) / rhs;
 }
 
-MPInt MPInt::operator+(const std::string &num) const {
-    return *this + MPInt(num);
-}
 
-
-MPInt operator+(const std::string &lhs, const MPInt &rhs) {
-    return MPInt(lhs) + rhs;
-}
-
-
-MPInt MPInt::operator-(const std::string &num) const {
-    return *this - MPInt(num);
-}
-
-
-MPInt operator-(const std::string &lhs, const MPInt &rhs) {
-    return MPInt(lhs) - rhs;
-}
-
-
-MPInt MPInt::operator*(const std::string &num) const {
-    return *this * MPInt(num);
-}
-
-
-MPInt operator*(const std::string &lhs, const MPInt &rhs) {
-    return MPInt(lhs) * rhs;
-}
-
-
-MPInt MPInt::operator/(const std::string &num) const {
-    return *this / MPInt(num);
-}
-
-
-MPInt operator/(const std::string &lhs, const MPInt &rhs) {
+MPInt operator/(const long long &lhs, const MPInt &rhs) {
     return MPInt(lhs) / rhs;
 }
 

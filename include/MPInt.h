@@ -68,7 +68,7 @@ public:
     friend std::istream& operator>>(std::istream&, MPInt&);
     friend std::ostream& operator<<(std::ostream&, const MPInt&);
 
-    std::string to_string() const;
+    [[nodiscard]] std::string to_string() const;
 //    int to_int() const;
 //    long to_long() const;
 //    long long to_long_long() const;
