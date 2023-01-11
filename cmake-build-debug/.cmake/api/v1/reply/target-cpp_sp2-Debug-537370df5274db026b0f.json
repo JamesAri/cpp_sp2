@@ -111,15 +111,7 @@
 			"sourceIndexes" : 
 			[
 				1,
-				2,
-				3,
-				4,
-				5,
-				6,
-				7,
-				8,
-				9,
-				10
+				2
 			]
 		}
 	],
@@ -133,52 +125,12 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "include/MPInt.h",
+			"path" : "include/core.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "include/util/validators.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "include/constructors/constructors.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "include/operators/assignment.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "include/operators/arithmetic-assigment.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "include/operators/arithemetic.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "include/operators/unary.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "include/operators/io-stream.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "include/util/math.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "include/relational/relational.h",
+			"path" : "include/conversion/convert.h",
 			"sourceGroupIndex" : 1
 		}
 	],

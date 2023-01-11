@@ -35,8 +35,8 @@ void add_trailing_zeroes(std::string &num, size_t num_zeroes) {
 }
 
 
-std::tuple<std::string, std::string> get_larger_and_smaller(const std::string &num1,
-                                                            const std::string &num2) {
+std::tuple<std::string, std::string> getLargerAndSmaller(const std::string &num1,
+                                                         const std::string &num2) {
     std::string larger, smaller;
     if (num1.size() > num2.size() or
         (num1.size() == num2.size() and num1 > num2)) {

@@ -3,86 +3,86 @@
 
 #include "MPInt.h"
 
-template <typename T>
-MPInt<T>& MPInt<T>::operator+=(const MPInt<T>& num) {
+
+MPInt& MPInt::operator+=(const MPInt& num) {
     *this = *this + num;
 
     return *this;
 }
 
-template <typename T>
-MPInt<T>& MPInt<T>::operator-=(const MPInt<T>& num) {
+
+MPInt& MPInt::operator-=(const MPInt& num) {
     *this = *this - num;
 
     return *this;
 }
 
-template <typename T>
-MPInt<T>& MPInt<T>::operator*=(const MPInt<T>& num) {
+
+MPInt& MPInt::operator*=(const MPInt& num) {
     *this = *this * num;
 
     return *this;
 }
 
-template <typename T>
-MPInt<T>& MPInt<T>::operator/=(const MPInt<T>& num) {
+
+MPInt& MPInt::operator/=(const MPInt& num) {
     *this = *this / num;
 
     return *this;
 }
 
-template <typename T>
-MPInt<T>& MPInt<T>::operator+=(const long long& num) {
-    *this = *this + MPInt<T>(num);
+
+MPInt& MPInt::operator+=(const long long& num) {
+    *this = *this + MPInt(num);
 
     return *this;
 }
 
-template <typename T>
-MPInt<T>& MPInt<T>::operator-=(const long long& num) {
-    *this = *this - MPInt<T>(num);
+
+MPInt& MPInt::operator-=(const long long& num) {
+    *this = *this - MPInt(num);
 
     return *this;
 }
 
-template <typename T>
-MPInt<T>& MPInt<T>::operator*=(const long long& num) {
-    *this = *this * MPInt<T>(num);
+
+MPInt& MPInt::operator*=(const long long& num) {
+    *this = *this * MPInt(num);
 
     return *this;
 }
 
-template <typename T>
-MPInt<T>& MPInt<T>::operator/=(const long long& num) {
-    *this = *this / MPInt<T>(num);
+
+MPInt& MPInt::operator/=(const long long& num) {
+    *this = *this / MPInt(num);
 
     return *this;
 }
 
-template <typename T>
-MPInt<T>& MPInt<T>::operator+=(const std::string& num) {
-    *this = *this + MPInt<T>(num);
+
+MPInt& MPInt::operator+=(const std::string& num) {
+    *this = *this + MPInt(num);
 
     return *this;
 }
 
-template <typename T>
-MPInt<T>& MPInt<T>::operator-=(const std::string& num) {
-    *this = *this - MPInt<T>(num);
+
+MPInt& MPInt::operator-=(const std::string& num) {
+    *this = *this - MPInt(num);
 
     return *this;
 }
 
-template <typename T>
-MPInt<T>& MPInt<T>::operator*=(const std::string& num) {
-    *this = *this * MPInt<T>(num);
+
+MPInt& MPInt::operator*=(const std::string& num) {
+    *this = *this * MPInt(num);
 
     return *this;
 }
 
-template <typename T>
-MPInt<T>& MPInt<T>::operator/=(const std::string& num) {
-    *this = *this / MPInt<T>(num);
+
+MPInt& MPInt::operator/=(const std::string& num) {
+    *this = *this / MPInt(num);
 
     return *this;
 }

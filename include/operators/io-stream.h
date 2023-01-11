@@ -3,17 +3,17 @@
 
 #include "MPInt.h"
 
-template <typename T>
-std::istream& operator>>(std::istream& in, MPInt<T>& num) {
+
+std::istream& operator>>(std::istream& in, MPInt& num) {
     std::string input;
     in >> input;
-    num = MPInt<T>(input);  // remove sign from value and set sign, if exists
+    num = MPInt(input);
 
     return in;
 }
 
-template <typename T>
-std::ostream& operator<<(std::ostream& out, const MPInt<T>& num) {
+
+std::ostream& operator<<(std::ostream& out, const MPInt& num) {
     if (num.sign == '-')
         out << num.sign;
     out << num.value;

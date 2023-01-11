@@ -3,16 +3,15 @@
 
 #include "MPInt.h"
 
-template<typename T>
-MPInt<T> &MPInt<T>::operator=(const MPInt<T> &num) {
+MPInt &MPInt::operator=(const MPInt &num) {
     value = num.value;
     sign = num.sign;
 
     return *this;
 }
 
-template<typename T>
-MPInt<T> &MPInt<T>::operator=(const long long &num) {
+
+MPInt &MPInt::operator=(const long long &num) {
     MPInt temp(num);
     value = temp.value;
     sign = temp.sign;
@@ -20,8 +19,8 @@ MPInt<T> &MPInt<T>::operator=(const long long &num) {
     return *this;
 }
 
-template<typename T>
-MPInt<T> &MPInt<T>::operator=(const std::string &num) {
+
+MPInt &MPInt::operator=(const std::string &num) {
     MPInt temp(num);
     value = temp.value;
     sign = temp.sign;

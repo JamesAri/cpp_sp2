@@ -3,8 +3,8 @@
 
 #include "MPInt.h"
 
-template<typename T>
-MPInt<T> abs(const MPInt<T> &num) {
+
+MPInt abs(const MPInt &num) {
     return num < 0 ? -num : num;
 }
 

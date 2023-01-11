@@ -2,9 +2,7 @@
 #define CPP_SP2_MPINT_H
 
 #include <string>
-#include "util/validators.h"
 
-template<typename T>
 class MPInt {
 private:
     std::string value;
@@ -70,7 +68,7 @@ public:
     friend std::istream& operator>>(std::istream&, MPInt&);
     friend std::ostream& operator<<(std::ostream&, const MPInt&);
 
-//    std::string to_string() const;
+    std::string to_string() const;
 //    int to_int() const;
 //    long to_long() const;
 //    long long to_long_long() const;

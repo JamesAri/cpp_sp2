@@ -3,14 +3,14 @@
 
 #include "MPInt.h"
 
-template<typename T>
-MPInt<T> MPInt<T>::operator+() const {
+
+MPInt MPInt::operator+() const {
     return *this;
 }
 
-template<typename T>
-MPInt<T> MPInt<T>::operator-() const {
-    MPInt<T> temp;
+
+MPInt MPInt::operator-() const {
+    MPInt temp;
     temp.value = value;
     if (value != "0") {
         if (sign == '-')
