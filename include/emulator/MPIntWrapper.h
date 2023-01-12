@@ -7,7 +7,9 @@
 #include "core.h"
 #include "util.h"
 
+/** Used with MPInt for 'unlimited' precision */
 constexpr size_t UNLIMITED = 0;
+
 
 template<size_t S>
 concept AtLeastFourBytes = (S >= 4) || (S == UNLIMITED);
@@ -24,12 +26,11 @@ private:
 
     /** The count of available numbers */
     MPInt RANGE = MPInt(pow(2, 8 * T));
-    /** Upper limit, this range includes zero, thus the minus one */
+    /** Upper limit, this range includes zero, thus the additional minus one */
     MPInt MAX_SIZE = MPInt(pow(2, 8 * T - 1) - 1);
     /** Lower limit */
     MPInt MIN_SIZE = -MPInt(pow(2, 8 * T - 1));
 public:
-    using MPInt::MPInt;
 
     void workWithTemplate() {
         std::cout << RANGE << std::endl;
@@ -37,43 +38,100 @@ public:
         std::cout << MIN_SIZE << std::endl;
     }
 
-//    MPInt::MPIntWrapper();
-    template<size_t U> requires AtLeastFourBytes<U>
-    explicit MPIntWrapper(const MPIntWrapper<U> &num): MPIntWrapper(num.value) {};
+    using MPInt::MPInt; // or just:     MPIntWrapper(): MPInt(){};
+
+    // Checks for overflow: if U's value is larger than T's maximum, exception is thrown.
+    template<size_t U>
+    requires AtLeastFourBytes<U>
+    explicit MPIntWrapper(const MPIntWrapper<U> &num): MPIntWrapper(num) {};
+
+    explicit MPIntWrapper(const MPInt &num) : MPInt(num) { overflowCheck(); };
+
     explicit MPIntWrapper(const long long &num) : MPInt(num) { overflowCheck(); };
+
     explicit MPIntWrapper(const std::string &num) : MPInt(num) { overflowCheck(); };
 
-//    template <size_t U> requires AtLeastFourBytes<U>
-//    MPIntWrapper<T>& operator=(const MPIntWrapper<U>&);
-//    MPIntWrapper& operator=(const long long&);
-//    MPIntWrapper& operator=(const std::string&);
+    template <size_t U> requires AtLeastFourBytes<U>
+    MPIntWrapper<T>& operator=(const MPIntWrapper<U>&);
+    MPIntWrapper& operator=(const long long&);
+    MPIntWrapper& operator=(const std::string&);
 
-//    MPIntWrapper operator+() const;
-//    MPIntWrapper operator-() const {
-//        auto temp = MPInt::operator-();
-//        return temp;
-//    };
-//
-//    template <size_t U> requires AtLeastFourBytes<U>
-//    MPIntWrapper<std::max(T, U)> operator+(const MPIntWrapper<U>&) const;
-//    template <size_t U> requires AtLeastFourBytes<U>
-//    MPIntWrapper<std::max(T, U)> operator-(const MPIntWrapper<U>&) const;
-//    template <size_t U> requires AtLeastFourBytes<U>
-//    MPIntWrapper<std::max(T, U)> operator*(const MPIntWrapper<U>&) const;
-//    template <size_t U> requires AtLeastFourBytes<U>
-//    MPIntWrapper<std::max(T, U)> operator/(const MPIntWrapper<U>&) const;
-//    template <size_t U> requires AtLeastFourBytes<U>
-//    MPIntWrapper<std::max(T, U)> operator%(const MPIntWrapper<U>&) const;
-//    MPIntWrapper operator+(const std::string&) const;
-//    MPIntWrapper operator-(const std::string&) const;
-//    MPIntWrapper operator*(const std::string&) const;
-//    MPIntWrapper operator/(const std::string&) const;
-//    MPIntWrapper operator%(const std::string&) const;
-//    MPIntWrapper operator+(const long long&) const;
-//    MPIntWrapper operator-(const long long&) const;
-//    MPIntWrapper operator*(const long long&) const;
-//    MPIntWrapper operator/(const long long&) const;
-//    MPIntWrapper operator%(const long long&) const;
+    MPIntWrapper operator+() const {
+        return MPIntWrapper<T>(MPInt::operator+());
+    };
+    MPIntWrapper operator-() const {
+        return MPIntWrapper<T>(MPInt::operator-());
+    };
+
+    template<size_t U>
+    requires AtLeastFourBytes<U>
+    MPIntWrapper<std::max(T, U)> operator+(const MPIntWrapper<U> &num) const {
+        return MPIntWrapper<std::max(T, U)>(MPInt::operator+(num));
+    }
+
+    template<size_t U>
+    requires AtLeastFourBytes<U>
+    MPIntWrapper<std::max(T, U)> operator-(const MPIntWrapper<U> &num) const {
+        return MPIntWrapper<std::max(T, U)>(MPInt::operator-(num));
+    }
+
+    template<size_t U>
+    requires AtLeastFourBytes<U>
+    MPIntWrapper<std::max(T, U)> operator*(const MPIntWrapper<U> &num) const {
+        return MPIntWrapper<std::max(T, U)>(MPInt::operator*(num));
+    }
+
+    template<size_t U>
+    requires AtLeastFourBytes<U>
+    MPIntWrapper<std::max(T, U)> operator/(const MPIntWrapper<U> &num) const {
+        return MPIntWrapper<std::max(T, U)>(MPInt::operator/(num));
+    }
+
+    template<size_t U>
+    requires AtLeastFourBytes<U>
+    MPIntWrapper<std::max(T, U)> operator%(const MPIntWrapper<U> &num) const {
+        return MPIntWrapper<std::max(T, U)>(MPInt::operator%(num));
+    }
+
+    MPIntWrapper operator+(const std::string &num) const {
+        return MPIntWrapper<T>(MPInt::operator+(num));
+    };
+
+    MPIntWrapper operator-(const std::string &num) const {
+        return MPIntWrapper<T>(MPInt::operator-(num));
+    }
+
+    MPIntWrapper operator*(const std::string &num) const {
+        return MPIntWrapper<T>(MPInt::operator*(num));
+    }
+
+    MPIntWrapper operator/(const std::string &num) const {
+        return MPIntWrapper<T>(MPInt::operator/(num));
+    }
+
+    MPIntWrapper operator%(const std::string &num) const {
+        return MPIntWrapper<T>(MPInt::operator%(num));
+    }
+
+    MPIntWrapper operator+(const long long &num) const {
+        return MPIntWrapper<T>(MPInt::operator+(num));
+    };
+
+    MPIntWrapper operator-(const long long &num) const {
+        return MPIntWrapper<T>(MPInt::operator-(num));
+    }
+
+    MPIntWrapper operator*(const long long &num) const {
+        return MPIntWrapper<T>(MPInt::operator*(num));
+    }
+
+    MPIntWrapper operator/(const long long &num) const {
+        return MPIntWrapper<T>(MPInt::operator/(num));
+    }
+
+    MPIntWrapper operator%(const long long &num) const {
+        return MPIntWrapper<T>(MPInt::operator%(num));
+    }
 //
 //    template <size_t U> requires AtLeastFourBytes<U>
 //    MPIntWrapper<T>& operator+=(const MPIntWrapper<U>&);

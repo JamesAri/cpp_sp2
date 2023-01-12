@@ -56,6 +56,6 @@ int main() {
     std::cout << a2 << std::endl;
     auto a = MPIntWrapper<4>("2147483647");
     std::cout << "OK:" << a << std::endl;
-    std::cout << "ERROR:" << (a < (a + 1)) << std::endl;
+    std::cout << "ERROR?:" << a + 2 << std::endl;
     return 0;
 }

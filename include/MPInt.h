@@ -33,6 +33,7 @@ public:
     MPInt operator*(const std::string&) const;
     MPInt operator/(const std::string&) const;
     MPInt operator%(const std::string&) const;
+
     MPInt operator+(const long long&) const;
     MPInt operator-(const long long&) const;
     MPInt operator*(const long long&) const;
