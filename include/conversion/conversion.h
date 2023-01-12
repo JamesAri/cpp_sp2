@@ -3,8 +3,7 @@
 
 #include "MPInt.h"
 
-template <size_t T>  requires AtLeastFourBytes<T>
-std::string MPInt<T>::to_string() const {
+std::string MPInt::to_string() const {
     if (sign == '-')
         return sign + value;
     return value;

@@ -3,110 +3,110 @@
 
 #include "MPInt.h"
 
-template<size_t T> requires AtLeastFourBytes<T>
-template<size_t U> requires AtLeastFourBytes<U>
-MPInt<T> &MPInt<T>::operator+=(const MPInt<U> &num) {
+
+
+MPInt &MPInt::operator+=(const MPInt &num) {
     *this = *this + num;
     return *this;
 }
 
 
-template<size_t T> requires AtLeastFourBytes<T>
-template<size_t U> requires AtLeastFourBytes<U>
-MPInt<T> &MPInt<T>::operator-=(const MPInt<U> &num) {
+
+
+MPInt &MPInt::operator-=(const MPInt &num) {
     *this = *this - num;
     return *this;
 }
 
 
-template<size_t T> requires AtLeastFourBytes<T>
-template<size_t U> requires AtLeastFourBytes<U>
-MPInt<T> &MPInt<T>::operator*=(const MPInt<U> &num) {
+
+
+MPInt &MPInt::operator*=(const MPInt &num) {
     *this = *this * num;
     return *this;
 }
 
 
-template<size_t T> requires AtLeastFourBytes<T>
-template<size_t U> requires AtLeastFourBytes<U>
-MPInt<T> &MPInt<T>::operator/=(const MPInt<U> &num) {
+
+
+MPInt &MPInt::operator/=(const MPInt &num) {
     *this = *this / num;
     return *this;
 }
 
 
-template<size_t T> requires AtLeastFourBytes<T>
-template<size_t U> requires AtLeastFourBytes<U>
-MPInt<T> &MPInt<T>::operator%=(const MPInt<U> &num) {
+
+
+MPInt &MPInt::operator%=(const MPInt &num) {
     *this = *this % num;
     return *this;
 }
 
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> &MPInt<T>::operator+=(const std::string &num) {
+
+MPInt &MPInt::operator+=(const std::string &num) {
     *this = *this + MPInt(num);
     return *this;
 }
 
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> &MPInt<T>::operator-=(const std::string &num) {
+
+MPInt &MPInt::operator-=(const std::string &num) {
     *this = *this - MPInt(num);
     return *this;
 }
 
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> &MPInt<T>::operator*=(const std::string &num) {
+
+MPInt &MPInt::operator*=(const std::string &num) {
     *this = *this * MPInt(num);
     return *this;
 }
 
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> &MPInt<T>::operator/=(const std::string &num) {
+
+MPInt &MPInt::operator/=(const std::string &num) {
     *this = *this / MPInt(num);
     return *this;
 }
 
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> &MPInt<T>::operator%=(const std::string &num) {
+
+MPInt &MPInt::operator%=(const std::string &num) {
     *this = *this % MPInt(num);
     return *this;
 }
 
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> &MPInt<T>::operator+=(const long long &num) {
+
+MPInt &MPInt::operator+=(const long long &num) {
     *this = *this + MPInt(num);
     return *this;
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> &MPInt<T>::operator-=(const long long &num) {
+
+MPInt &MPInt::operator-=(const long long &num) {
     *this = *this - MPInt(num);
     return *this;
 }
 
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> &MPInt<T>::operator*=(const long long &num) {
+
+MPInt &MPInt::operator*=(const long long &num) {
     *this = *this * MPInt(num);
     return *this;
 }
 
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> &MPInt<T>::operator/=(const long long &num) {
+
+MPInt &MPInt::operator/=(const long long &num) {
     *this = *this / MPInt(num);
     return *this;
 }
 
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> &MPInt<T>::operator%=(const long long &num) {
+
+MPInt &MPInt::operator%=(const long long &num) {
     *this = *this % MPInt(num);
     return *this;
 }

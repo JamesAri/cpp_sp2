@@ -15,22 +15,20 @@
  * Algorithmic Space Complexity : O(n)
  * where n is the larger length of respective strings(Integers) provided.
  */
-template<size_t T> requires AtLeastFourBytes<T>
-template<size_t U> requires AtLeastFourBytes<U>
-MPInt<std::max(T, U)> MPInt<T>::operator+(const MPInt<U> &num) const {
+MPInt MPInt::operator+(const MPInt &num) const {
     if (this->sign == '+' and num.sign == '-') { // (+this) + (-num) = (+this) - (+num)
         MPInt tmp = num;
         tmp.sign = '+';
-        return MPInt<std::max(T, U)>(*this - tmp);
+        return MPInt(*this - tmp);
     } else if (this->sign == '-' and num.sign == '+') { // (-this) + (+num) = -( (+this) - (+num) )
         MPInt tmp = *this;
         tmp.sign = '+';
-        return MPInt<std::max(T, U)>(-(tmp - num));
+        return MPInt(-(tmp - num));
     }
 
     auto [larger, smaller] = getLargerAndSmaller(this->value, num.value);
 
-    MPInt<std::max(T, U)> result;
+    MPInt result;
     result.value = "";
     int carry = 0, sum;
     auto length = static_cast<long>(larger.size());
@@ -48,24 +46,24 @@ MPInt<std::max(T, U)> MPInt<T>::operator+(const MPInt<U> &num) const {
     return result;
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> MPInt<T>::operator+(const std::string &num) const {
-    return *this + MPInt<T>(num);
+
+MPInt MPInt::operator+(const std::string &num) const {
+    return *this + MPInt(num);
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> MPInt<T>::operator+(const long long &num) const {
-    return *this + MPInt<T>(num);
+
+MPInt MPInt::operator+(const long long &num) const {
+    return *this + MPInt(num);
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> operator+(const std::string &lhs, const MPInt<T> &rhs) {
-    return MPInt<T>(lhs) + rhs;
+
+MPInt operator+(const std::string &lhs, const MPInt &rhs) {
+    return MPInt(lhs) + rhs;
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> operator+(const long long &lhs, const MPInt<T> &rhs) {
-    return MPInt<T>(lhs) + rhs;
+
+MPInt operator+(const long long &lhs, const MPInt &rhs) {
+    return MPInt(lhs) + rhs;
 }
 
 
@@ -74,20 +72,18 @@ MPInt<T> operator+(const long long &lhs, const MPInt<T> &rhs) {
  * Algorithmic Space Complexity : O(n)
  * where n is the larger length of respective strings(Integers) provided.
  */
-template<size_t T> requires AtLeastFourBytes<T>
-template<size_t U> requires AtLeastFourBytes<U>
-MPInt<std::max(T, U)> MPInt<T>::operator-(const MPInt<U> &num) const {
+MPInt MPInt::operator-(const MPInt &num) const {
     if (this->sign == '+' and num.sign == '-') { // (+this) - (-num) = (+this) + (+num)
         MPInt tmp = num;
         tmp.sign = '+';
-        return MPInt<std::max(T, U)>(*this + tmp);
+        return MPInt(*this + tmp);
     } else if (this->sign == '-' and num.sign == '+') { // (-this) - (+num) = -( (+this) + (+num) )
         MPInt tmp = *this;
         tmp.sign = '+';
-        return MPInt<std::max(T, U)>(-(tmp + num));
+        return MPInt(-(tmp + num));
     }
 
-    MPInt<std::max(T, U)> result;
+    MPInt result;
     std::string larger, smaller;
     if (abs(*this) > abs(num)) {
         larger = this->value;
@@ -134,24 +130,24 @@ MPInt<std::max(T, U)> MPInt<T>::operator-(const MPInt<U> &num) const {
     return result;
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> MPInt<T>::operator-(const std::string &num) const {
-    return *this - MPInt<T>(num);
+
+MPInt MPInt::operator-(const std::string &num) const {
+    return *this - MPInt(num);
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> MPInt<T>::operator-(const long long &num) const {
-    return *this - MPInt<T>(num);
+
+MPInt MPInt::operator-(const long long &num) const {
+    return *this - MPInt(num);
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> operator-(const std::string &lhs, const MPInt<T> &rhs) {
-    return MPInt<T>(lhs) - rhs;
+
+MPInt operator-(const std::string &lhs, const MPInt &rhs) {
+    return MPInt(lhs) - rhs;
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> operator-(const long long &lhs, const MPInt<T> &rhs) {
-    return MPInt<T>(lhs) - rhs;
+
+MPInt operator-(const long long &lhs, const MPInt &rhs) {
+    return MPInt(lhs) - rhs;
 }
 
 
@@ -163,17 +159,15 @@ MPInt<T> operator-(const long long &lhs, const MPInt<T> &rhs) {
  * Algorithmic Space Complexity : O(n)
  * where n is the larger length of respective strings(Integers) provided.
  */
-template<size_t T> requires AtLeastFourBytes<T>
-template<size_t U> requires AtLeastFourBytes<U>
-MPInt<std::max(T, U)> MPInt<T>::operator*(const MPInt<U> &num) const {
+MPInt MPInt::operator*(const MPInt &num) const {
     if (*this == 0 or num == 0)
-        return MPInt<std::max(T, U)>(0);
+        return MPInt(0);
     if (*this == 1)
-        return MPInt<std::max(T, U)>(num);
+        return num;
     if (num == 1)
-        return MPInt<std::max(T, U)>(*this);
+        return *this;
 
-    MPInt<std::max(T, U)> product;
+    MPInt product;
     if (abs(*this) <= FLOOR_SQRT_LLONG_MAX and abs(num) <= FLOOR_SQRT_LLONG_MAX)
         product = std::stoll(this->value) * std::stoll(num.value);
     else {
@@ -219,29 +213,29 @@ MPInt<std::max(T, U)> MPInt<T>::operator*(const MPInt<U> &num) const {
     return product;
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> MPInt<T>::operator*(const std::string &num) const {
-    return *this * MPInt<T>(num);
+
+MPInt MPInt::operator*(const std::string &num) const {
+    return *this * MPInt(num);
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> MPInt<T>::operator*(const long long &num) const {
-    return *this * MPInt<T>(num);
+
+MPInt MPInt::operator*(const long long &num) const {
+    return *this * MPInt(num);
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> operator*(const std::string &lhs, const MPInt<T> &rhs) {
-    return MPInt<T>(lhs) * rhs;
+
+MPInt operator*(const std::string &lhs, const MPInt &rhs) {
+    return MPInt(lhs) * rhs;
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> operator*(const long long &lhs, const MPInt<T> &rhs) {
-    return MPInt<T>(lhs) * rhs;
+
+MPInt operator*(const long long &lhs, const MPInt &rhs) {
+    return MPInt(lhs) * rhs;
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-std::tuple<MPInt<T>, MPInt<T>> divide(const MPInt<T> &dividend, const MPInt<T> &divisor) {
-    MPInt<T> quotient, remainder, temp;
+
+std::tuple<MPInt, MPInt> divide(const MPInt &dividend, const MPInt &divisor) {
+    MPInt quotient, remainder, temp;
 
     temp = divisor;
     quotient = 1;
@@ -262,22 +256,20 @@ std::tuple<MPInt<T>, MPInt<T>> divide(const MPInt<T> &dividend, const MPInt<T> &
  * Algorithmic Space Complexity : O(n)
  * where n is the larger length of respective strings(Integers) provided.
  */
-template<size_t T> requires AtLeastFourBytes<T>
-template<size_t U> requires AtLeastFourBytes<U>
-MPInt<std::max(T, U)> MPInt<T>::operator/(const MPInt<U> &num) const {
+MPInt MPInt::operator/(const MPInt &num) const {
     MPInt abs_dividend = abs(*this);
     MPInt abs_divisor = abs(num);
 
     if (num == 0)
         throw std::logic_error("Attempted division by zero");
     if (abs_dividend < abs_divisor)
-        return MPInt<std::max(T, U)>(0);
+        return MPInt(0);
     if (num == 1)
-        return MPInt<std::max(T, U)>(*this);
+        return *this;
     if (num == -1)
-        return MPInt<std::max(T, U)>(-(*this));
+        return -(*this);
 
-    MPInt<std::max(T, U)> quotient;
+    MPInt quotient;
     if (abs_dividend <= LLONG_MAX and abs_divisor <= LLONG_MAX)
         quotient = std::stoll(abs_dividend.value) / std::stoll(abs_divisor.value);
     else if (abs_dividend == abs_divisor)
@@ -319,38 +311,37 @@ MPInt<std::max(T, U)> MPInt<T>::operator/(const MPInt<U> &num) const {
     return quotient;
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> MPInt<T>::operator/(const std::string &num) const {
-    return *this / MPInt<T>(num);
+
+MPInt MPInt::operator/(const std::string &num) const {
+    return *this / MPInt(num);
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> MPInt<T>::operator/(const long long &num) const {
-    return *this / MPInt<T>(num);
+
+MPInt MPInt::operator/(const long long &num) const {
+    return *this / MPInt(num);
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> operator/(const std::string &lhs, const MPInt<T> &rhs) {
-    return MPInt<T>(lhs) / rhs;
+
+MPInt operator/(const std::string &lhs, const MPInt &rhs) {
+    return MPInt(lhs) / rhs;
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> operator/(const long long &lhs, const MPInt<T> &rhs) {
-    return MPInt<T>(lhs) / rhs;
+
+MPInt operator/(const long long &lhs, const MPInt &rhs) {
+    return MPInt(lhs) / rhs;
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-template<size_t U> requires AtLeastFourBytes<U>
-MPInt<std::max(T, U)> MPInt<T>::operator%(const MPInt<U> &num) const {
+
+MPInt MPInt::operator%(const MPInt &num) const {
     MPInt abs_dividend = abs(*this);
     MPInt abs_divisor = abs(num);
 
     if (abs_divisor == 0)
         throw std::logic_error("Attempted division by zero");
     if (abs_divisor == 1 or abs_divisor == abs_dividend)
-        return MPInt<std::max(T, U)>(MPInt(0));
+        return MPInt(MPInt(0));
 
-    MPInt<std::max(T, U)> remainder;
+    MPInt remainder;
     if (abs_dividend <= LLONG_MAX and abs_divisor <= LLONG_MAX)
         remainder = std::stoll(abs_dividend.value) % std::stoll(abs_divisor.value);
     else if (abs_dividend < abs_divisor)
@@ -372,24 +363,24 @@ MPInt<std::max(T, U)> MPInt<T>::operator%(const MPInt<U> &num) const {
     return remainder;
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> MPInt<T>::operator%(const std::string &num) const {
-    return *this % MPInt<T>(num);
+
+MPInt MPInt::operator%(const std::string &num) const {
+    return *this % MPInt(num);
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> MPInt<T>::operator%(const long long &num) const {
-    return *this % MPInt<T>(num);
+
+MPInt MPInt::operator%(const long long &num) const {
+    return *this % MPInt(num);
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> operator%(const std::string &lhs, const MPInt<T> &rhs) {
-    return MPInt<T>(lhs) % rhs;
+
+MPInt operator%(const std::string &lhs, const MPInt &rhs) {
+    return MPInt(lhs) % rhs;
 }
 
-template<size_t T> requires AtLeastFourBytes<T>
-MPInt<T> operator%(const long long &lhs, const MPInt<T> &rhs) {
-    return MPInt<T>(lhs) % rhs;
+
+MPInt operator%(const long long &lhs, const MPInt &rhs) {
+    return MPInt(lhs) % rhs;
 }
 
 #endif //CPP_SP2_ARITHEMETIC_H
