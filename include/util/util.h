@@ -1,5 +1,5 @@
-#ifndef CPP_SP2_VALIDATORS_H
-#define CPP_SP2_VALIDATORS_H
+#ifndef CPP_SP2_UTIL_H
+#define CPP_SP2_UTIL_H
 
 #include <string>
 
@@ -63,4 +63,4 @@ bool is_power_of_10(const std::string &num) {
     return true;    // first digit is 1 and the following digits are all 0
 }
 
-#endif //CPP_SP2_VALIDATORS_H
+#endif //CPP_SP2_UTIL_H

@@ -3,8 +3,8 @@
 
 #include "MPInt.h"
 
-
-MPInt abs(const MPInt &num) {
+template<size_t T> requires AtLeastFourBytes<T>
+MPInt<T> abs(const MPInt<T> &num) {
     return num < 0 ? -num : num;
 }
 

@@ -9,7 +9,7 @@
 #include "operators/io-stream.h"
 #include "operators/unary.h"
 #include "operators/relational.h"
-#include "conversion/convert.h"
+#include "conversion/conversion.h"
 
 
 #endif //CPP_SP2_CORE_H

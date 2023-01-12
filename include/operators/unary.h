@@ -3,13 +3,14 @@
 
 #include "MPInt.h"
 
-
-MPInt MPInt::operator+() const {
+template<size_t T> requires AtLeastFourBytes<T>
+MPInt<T> MPInt<T>::operator+() const {
     return *this;
 }
 
 
-MPInt MPInt::operator-() const {
+template<size_t T> requires AtLeastFourBytes<T>
+MPInt<T> MPInt<T>::operator-() const {
     MPInt temp;
     temp.value = value;
     if (value != "0") {

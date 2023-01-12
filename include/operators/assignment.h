@@ -3,15 +3,17 @@
 
 #include "MPInt.h"
 
-MPInt &MPInt::operator=(const MPInt &num) {
+template<size_t T> requires AtLeastFourBytes<T>
+template<size_t U> requires AtLeastFourBytes<U>
+MPInt<T> &MPInt<T>::operator=(const MPInt<U> &num) {
     value = num.value;
     sign = num.sign;
 
     return *this;
 }
 
-
-MPInt &MPInt::operator=(const long long &num) {
+template<size_t T> requires AtLeastFourBytes<T>
+MPInt<T> &MPInt<T>::operator=(const long long &num) {
     MPInt temp(num);
     value = temp.value;
     sign = temp.sign;
@@ -19,8 +21,8 @@ MPInt &MPInt::operator=(const long long &num) {
     return *this;
 }
 
-
-MPInt &MPInt::operator=(const std::string &num) {
+template<size_t T> requires AtLeastFourBytes<T>
+MPInt<T> &MPInt<T>::operator=(const std::string &num) {
     MPInt temp(num);
     value = temp.value;
     sign = temp.sign;
