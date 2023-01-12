@@ -1,7 +1,7 @@
 #ifndef CPP_SP2_CORE_H
 #define CPP_SP2_CORE_H
 
-#include "MPInt.h"
+#include "MPIntBase.h"
 #include "constructors/constructors.h"
 #include "operators/arithemetic.h"
 #include "operators/arithmetic-assigment.h"

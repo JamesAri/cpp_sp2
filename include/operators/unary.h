@@ -1,15 +1,15 @@
 #ifndef CPP_SP2_UNARY_H
 #define CPP_SP2_UNARY_H
 
-#include "MPInt.h"
+#include "MPIntBase.h"
 
 
-MPInt MPInt::operator+() const {
+MPIntBase MPIntBase::operator+() const {
     return *this;
 }
 
-MPInt MPInt::operator-() const {
-    MPInt temp;
+MPIntBase MPIntBase::operator-() const {
+    MPIntBase temp;
     temp.value = value;
     if (value != "0") {
         if (sign == '-')

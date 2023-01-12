@@ -1,23 +1,23 @@
 #ifndef CPP_SP2_CONSTRUCTORS_H
 #define CPP_SP2_CONSTRUCTORS_H
 
-#include "MPInt.h"
+#include "MPIntBase.h"
 #include "util/util.h"
 
 
-MPInt::MPInt() {
+MPIntBase::MPIntBase() {
     value = "0";
     sign = '+';
 }
 
 
-MPInt::MPInt(const MPInt &num) {
+MPIntBase::MPIntBase(const MPIntBase &num) {
     value = num.value;
     sign = num.sign;
 }
 
 
-MPInt::MPInt(const long long &num) {
+MPIntBase::MPIntBase(const long long &num) {
     value = std::to_string(std::abs(num));
     if (num < 0)
         sign = '-';
@@ -26,7 +26,7 @@ MPInt::MPInt(const long long &num) {
 }
 
 
-MPInt::MPInt(const std::string &num) {
+MPIntBase::MPIntBase(const std::string &num) {
     if (num[0] == '+' or num[0] == '-') {
         std::string magnitude = num.substr(1);
         if (is_valid_number(magnitude)) {

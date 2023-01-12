@@ -1,18 +1,18 @@
 #ifndef CPP_SP2_IO_STREAM_H
 #define CPP_SP2_IO_STREAM_H
 
-#include "MPInt.h"
+#include "MPIntBase.h"
 
-std::istream &operator>>(std::istream &in, MPInt &num) {
+std::istream &operator>>(std::istream &in, MPIntBase &num) {
     std::string input;
     in >> input;
-    num = MPInt(input);
+    num = MPIntBase(input);
 
     return in;
 }
 
 
-std::ostream &operator<<(std::ostream &out, const MPInt &num) {
+std::ostream &operator<<(std::ostream &out, const MPIntBase &num) {
     if (num.sign == '-')
         out << num.sign;
     out << num.value;

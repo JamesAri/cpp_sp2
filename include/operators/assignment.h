@@ -1,11 +1,11 @@
 #ifndef CPP_SP2_ASSIGNMENT_H
 #define CPP_SP2_ASSIGNMENT_H
 
-#include "MPInt.h"
+#include "MPIntBase.h"
 
 
 
-MPInt &MPInt::operator=(const MPInt &num) {
+MPIntBase &MPIntBase::operator=(const MPIntBase &num) {
     value = num.value;
     sign = num.sign;
 
@@ -13,8 +13,8 @@ MPInt &MPInt::operator=(const MPInt &num) {
 }
 
 
-MPInt &MPInt::operator=(const long long &num) {
-    MPInt temp(num);
+MPIntBase &MPIntBase::operator=(const long long &num) {
+    MPIntBase temp(num);
     value = temp.value;
     sign = temp.sign;
 
@@ -22,8 +22,8 @@ MPInt &MPInt::operator=(const long long &num) {
 }
 
 
-MPInt &MPInt::operator=(const std::string &num) {
-    MPInt temp(num);
+MPIntBase &MPIntBase::operator=(const std::string &num) {
+    MPIntBase temp(num);
     value = temp.value;
     sign = temp.sign;
 

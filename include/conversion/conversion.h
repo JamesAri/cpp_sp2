@@ -1,9 +1,9 @@
 #ifndef CPP_SP2_CONVERSION_H
 #define CPP_SP2_CONVERSION_H
 
-#include "MPInt.h"
+#include "MPIntBase.h"
 
-std::string MPInt::to_string() const {
+std::string MPIntBase::to_string() const {
     if (sign == '-')
         return sign + value;
     return value;
