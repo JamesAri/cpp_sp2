@@ -36,8 +36,6 @@ public:
 
     void printDebugInfo();
 
-//    MPIntWrapper(): MPIntBase(){};
-
     /* Note:
      * Ze zadani: Výsledná přesnost (výše uvednená "maximální velikost") bude volena jako největší ze vstupních...
      * zde jsem si nebyl jisty zda vracet maximum, ci nechat puvodni velikost, jak je tomu obvykle zvykem.
