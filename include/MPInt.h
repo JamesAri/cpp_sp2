@@ -3,9 +3,12 @@
 
 #include <string>
 #include <iostream>
+#include <cmath>
+
+constexpr size_t UNLIMITED = 0;
 
 template<size_t S>
-concept AtLeastFourBytes = (S >= 4);
+concept AtLeastFourBytes = (S >= 4) || (S == UNLIMITED);
 
 template <size_t T> requires AtLeastFourBytes<T>
 class MPInt {
@@ -14,11 +17,14 @@ private:
     friend class MPInt;
     std::string value;
     char sign;
-    size_t maxSize = T * 5;
+    size_t RANGE = pow(2, 8 * T);
+    size_t MAX_SIZE = pow(2, 8 * T - 1) - 1;
+    size_t MIN_SIZE = pow(2, 8 * T - 1);
 public:
-
     void workWithTemplate() {
-        std::cout << T << std::endl;
+        std::cout << RANGE << std::endl;
+        std::cout << MAX_SIZE << std::endl;
+        std::cout << MIN_SIZE << std::endl;
     }
 
     MPInt();
