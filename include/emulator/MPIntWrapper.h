@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <sstream>
 #include <cmath>
 #include "core.h"
 #include "util.h"
@@ -31,19 +32,22 @@ private:
     /** Lower limit */
     MPInt MIN_SIZE = -MPInt(pow(2, 8 * T - 1));
 public:
+    using MPInt::MPInt;
 
-    void workWithTemplate() {
-        std::cout << RANGE << std::endl;
-        std::cout << MAX_SIZE << std::endl;
-        std::cout << MIN_SIZE << std::endl;
-    }
+    void printDebugInfo();
 
-    using MPInt::MPInt; // or just:     MPIntWrapper(): MPInt(){};
-
-    // Checks for overflow: if U's value is larger than T's maximum, exception is thrown.
+    /* Note:
+     * Ze zadani: Výsledná přesnost (výše uvednená "maximální velikost") bude volena jako největší ze vstupních...
+     * zde jsem si nebyl jisty zda vracet maximum, ci nechat puvodni velikost, jak je tomu obvykle zvykem.
+     * Zde jsem zvolil to druhe.
+     * Checks for overflow: if U's value is larger than T's maximum, exception is thrown. */
     template<size_t U>
     requires AtLeastFourBytes<U>
-    explicit MPIntWrapper(const MPIntWrapper<U> &num): MPIntWrapper(num) {};
+    explicit MPIntWrapper(const MPIntWrapper<U> &num) {
+        value = num.value;
+        sign = num.sign;
+        overflowCheck();
+    };
 
     explicit MPIntWrapper(const MPInt &num) : MPInt(num) { overflowCheck(); };
 
@@ -51,15 +55,33 @@ public:
 
     explicit MPIntWrapper(const std::string &num) : MPInt(num) { overflowCheck(); };
 
-    template <size_t U> requires AtLeastFourBytes<U>
-    MPIntWrapper<T>& operator=(const MPIntWrapper<U>&);
-    MPIntWrapper& operator=(const long long&);
-    MPIntWrapper& operator=(const std::string&);
+    template<size_t U>
+    requires AtLeastFourBytes<U>
+    MPIntWrapper<T> &operator=(const MPIntWrapper<U> &num) {
+        *this = MPIntWrapper<T>(num);
+        return *this;
+    };
 
-    MPIntWrapper operator+() const {
+    MPIntWrapper<T> &operator=(const MPInt &num) {
+        *this = MPIntWrapper<T>(num);
+        return *this;
+    };
+
+    MPIntWrapper<T> &operator=(const long long &num) {
+        *this = MPIntWrapper<T>(num);
+        return *this;
+    };
+
+    MPIntWrapper<T> &operator=(const std::string &num) {
+        *this = MPIntWrapper<T>(num);
+        return *this;
+    }
+
+    MPIntWrapper<T> operator+() const {
         return MPIntWrapper<T>(MPInt::operator+());
     };
-    MPIntWrapper operator-() const {
+
+    MPIntWrapper<T> operator-() const {
         return MPIntWrapper<T>(MPInt::operator-());
     };
 
@@ -93,100 +115,147 @@ public:
         return MPIntWrapper<std::max(T, U)>(MPInt::operator%(num));
     }
 
-    MPIntWrapper operator+(const std::string &num) const {
+    MPIntWrapper<T> operator+(const std::string &num) const {
         return MPIntWrapper<T>(MPInt::operator+(num));
     };
 
-    MPIntWrapper operator-(const std::string &num) const {
+    MPIntWrapper<T> operator-(const std::string &num) const {
         return MPIntWrapper<T>(MPInt::operator-(num));
     }
 
-    MPIntWrapper operator*(const std::string &num) const {
+    MPIntWrapper<T> operator*(const std::string &num) const {
         return MPIntWrapper<T>(MPInt::operator*(num));
     }
 
-    MPIntWrapper operator/(const std::string &num) const {
+    MPIntWrapper<T> operator/(const std::string &num) const {
         return MPIntWrapper<T>(MPInt::operator/(num));
     }
 
-    MPIntWrapper operator%(const std::string &num) const {
+    MPIntWrapper<T> operator%(const std::string &num) const {
         return MPIntWrapper<T>(MPInt::operator%(num));
     }
 
-    MPIntWrapper operator+(const long long &num) const {
+    MPIntWrapper<T> operator+(const long long &num) const {
         return MPIntWrapper<T>(MPInt::operator+(num));
     };
 
-    MPIntWrapper operator-(const long long &num) const {
+    MPIntWrapper<T> operator-(const long long &num) const {
         return MPIntWrapper<T>(MPInt::operator-(num));
     }
 
-    MPIntWrapper operator*(const long long &num) const {
+    MPIntWrapper<T> operator*(const long long &num) const {
         return MPIntWrapper<T>(MPInt::operator*(num));
     }
 
-    MPIntWrapper operator/(const long long &num) const {
+    MPIntWrapper<T> operator/(const long long &num) const {
         return MPIntWrapper<T>(MPInt::operator/(num));
     }
 
-    MPIntWrapper operator%(const long long &num) const {
+    MPIntWrapper<T> operator%(const long long &num) const {
         return MPIntWrapper<T>(MPInt::operator%(num));
     }
-//
-//    template <size_t U> requires AtLeastFourBytes<U>
-//    MPIntWrapper<T>& operator+=(const MPIntWrapper<U>&);
-//    template <size_t U> requires AtLeastFourBytes<U>
-//    MPIntWrapper<T>& operator-=(const MPIntWrapper<U>&);
-//    template <size_t U> requires AtLeastFourBytes<U>
-//    MPIntWrapper<T>& operator*=(const MPIntWrapper<U>&);
-//    template <size_t U> requires AtLeastFourBytes<U>
-//    MPIntWrapper<T>& operator/=(const MPIntWrapper<U>&);
-//    template <size_t U> requires AtLeastFourBytes<U>
-//    MPIntWrapper<T>& operator%=(const MPIntWrapper<U>&);
-//    MPIntWrapper& operator+=(const std::string&);
-//    MPIntWrapper& operator-=(const std::string&);
-//    MPIntWrapper& operator*=(const std::string&);
-//    MPIntWrapper& operator/=(const std::string&);
-//    MPIntWrapper& operator%=(const std::string&);
-//    MPIntWrapper& operator+=(const long long&);
-//    MPIntWrapper& operator-=(const long long&);
-//    MPIntWrapper& operator*=(const long long&);
-//    MPIntWrapper& operator/=(const long long&);
-//    MPIntWrapper& operator%=(const long long&);
-//
-//    template <size_t U> requires AtLeastFourBytes<U>
-//    bool operator<(const MPIntWrapper<U>&) const;
-//    template <size_t U> requires AtLeastFourBytes<U>
-//    bool operator>(const MPIntWrapper<U>&) const;
-//    template <size_t U> requires AtLeastFourBytes<U>
-//    bool operator==(const MPIntWrapper<U>&) const;
-//    template <size_t U> requires AtLeastFourBytes<U>
-//    bool operator!=(const MPIntWrapper<U>&) const;
-//    template <size_t U> requires AtLeastFourBytes<U>
-//    bool operator<=(const MPIntWrapper<U>&) const;
-//    template <size_t U> requires AtLeastFourBytes<U>
-//    bool operator>=(const MPIntWrapper<U>&) const;
-//    bool operator<(const std::string&) const;
-//    bool operator>(const std::string&) const;
-//    bool operator==(const std::string&) const;
-//    bool operator!=(const std::string&) const;
-//    bool operator<=(const std::string&) const;
-//    bool operator>=(const std::string&) const;
-//    bool operator<(const long long&) const;
-//    bool operator>(const long long&) const;
-//    bool operator==(const long long&) const;
-//    bool operator!=(const long long&) const;
-//    bool operator<=(const long long&) const;
-//    bool operator>=(const long long&) const;
-//
-//    friend std::istream& operator>>(std::istream&, MPIntWrapper&);
-//    friend std::ostream& operator<<(std::ostream&, const MPIntWrapper&);
-//
-//    [[nodiscard]] std::string to_string() const;
+
+    template<size_t U>
+    requires AtLeastFourBytes<U>
+    MPIntWrapper<T> &operator+=(const MPIntWrapper<U> &num) {
+        this = MPInt::operator+=(num);
+        return *this;
+    }
+
+    template<size_t U>
+    requires AtLeastFourBytes<U>
+    MPIntWrapper<T> &operator-=(const MPIntWrapper<U> &num) {
+        *this = MPInt::operator-(num);
+        return *this;
+    }
+
+    template<size_t U>
+    requires AtLeastFourBytes<U>
+    MPIntWrapper<T> &operator*=(const MPIntWrapper<U> &num) {
+        *this = MPInt::operator*(num);
+        return *this;
+    }
+
+    template<size_t U>
+    requires AtLeastFourBytes<U>
+    MPIntWrapper<T> &operator/=(const MPIntWrapper<U> &num) {
+        *this = MPInt::operator/(num);
+        return *this;
+    }
+
+    template<size_t U>
+    requires AtLeastFourBytes<U>
+    MPIntWrapper<T> &operator%=(const MPIntWrapper<U> &num) {
+        *this = MPInt::operator%(num);
+        return *this;
+    }
+
+    MPIntWrapper<T> &operator+=(const std::string &num) {
+        this = MPInt::operator+=(num);
+        return *this;
+    }
+
+
+    MPIntWrapper<T> &operator-=(const std::string &num) {
+        *this = MPInt::operator-(num);
+        return *this;
+    }
+
+    MPIntWrapper<T> &operator*=(const std::string &num) {
+        *this = MPInt::operator*(num);
+        return *this;
+    }
+
+    MPIntWrapper<T> &operator/=(const std::string &num) {
+        *this = MPInt::operator/(num);
+        return *this;
+    }
+
+    MPIntWrapper<T> &operator%=(const std::string &num) {
+        *this = MPInt::operator%(num);
+        return *this;
+    }
+
+    MPIntWrapper<T> &operator+=(const long long &num) {
+        *this = MPInt::operator+=(num);
+        return *this;
+    }
+
+    MPIntWrapper<T> &operator-=(const long long &num) {
+        *this = MPInt::operator-(num);
+        return *this;
+    }
+
+    MPIntWrapper<T> &operator*=(const long long &num) {
+        *this = MPInt::operator*(num);
+        return *this;
+    }
+
+    MPIntWrapper<T> &operator/=(const long long &num) {
+        *this = MPInt::operator/(num);
+        return *this;
+    }
+
+    MPIntWrapper<T> &operator%=(const long long &num) {
+        *this = MPInt::operator%(num);
+        return *this;
+    }
 };
 
 template<size_t T>
-requires AtLeastFourBytes<T>void MPIntWrapper<T>::overflowCheck() {
+requires AtLeastFourBytes<T>
+void MPIntWrapper<T>::printDebugInfo() {
+    std::ostringstream ss;
+    ss << "value=" << this << "\n"
+       << "range=" << RANGE << "\n"
+       << "max_size=" << MAX_SIZE << "\n"
+       << "min_size=" << MIN_SIZE << "\n";
+    std::cout << ss.rdbuf();
+}
+
+template<size_t T>
+requires AtLeastFourBytes<T>
+void MPIntWrapper<T>::overflowCheck() {
     if (T == UNLIMITED) return;
     bool error = true;
     if (this->value >= RANGE) {
@@ -199,7 +268,7 @@ requires AtLeastFourBytes<T>void MPIntWrapper<T>::overflowCheck() {
         error = false;
     }
     if (error)
-        throw OverflowException("MPInt<" + std::to_string(T) + "> number overflow.\nvalue=" + this->to_string());
+        throw OverflowException("\nMPInt<" + std::to_string(T) + "> number overflow, value=" + this->to_string());
 }
 
 

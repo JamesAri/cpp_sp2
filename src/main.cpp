@@ -52,10 +52,10 @@ int main() {
     relationalOperatorsTest();
     ///////////////////////////////
     auto a2 = MPIntWrapper<4>();
-    a2.workWithTemplate();
     std::cout << a2 << std::endl;
-    auto a = MPIntWrapper<4>("2147483647");
+    auto a = MPIntWrapper<4>("2147483646");
+    a += -2;
     std::cout << "OK:" << a << std::endl;
-    std::cout << "ERROR?:" << a + 2 << std::endl;
+    a.printDebugInfo();
     return 0;
 }
