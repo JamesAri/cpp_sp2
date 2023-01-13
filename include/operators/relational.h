@@ -1,9 +1,8 @@
 #ifndef CPP_SP2_RELATIONAL_H
 #define CPP_SP2_RELATIONAL_H
 
-#include "core/MPIntBase.h"
+#include "base/MPIntBase.h"
 #include "operators/unary.h"
- 
 
 
 bool MPIntBase::operator<(const MPIntBase &num) const {
@@ -20,13 +19,9 @@ bool MPIntBase::operator<(const MPIntBase &num) const {
 }
 
 
-
-
 bool MPIntBase::operator>(const MPIntBase &num) const {
     return !((*this < num) or (*this == num));
 }
-
-
 
 
 bool MPIntBase::operator==(const MPIntBase &num) const {
@@ -34,13 +29,9 @@ bool MPIntBase::operator==(const MPIntBase &num) const {
 }
 
 
-
-
 bool MPIntBase::operator!=(const MPIntBase &num) const {
     return !(*this == num);
 }
-
-
 
 
 bool MPIntBase::operator>=(const MPIntBase &num) const {
@@ -48,12 +39,9 @@ bool MPIntBase::operator>=(const MPIntBase &num) const {
 }
 
 
-
-
 bool MPIntBase::operator<=(const MPIntBase &num) const {
     return (*this < num) or (*this == num);
 }
-
 
 
 bool MPIntBase::operator<(const std::string &num) const {
@@ -61,11 +49,9 @@ bool MPIntBase::operator<(const std::string &num) const {
 }
 
 
-
 bool MPIntBase::operator<(const long long &num) const {
     return *this < MPIntBase(num);
 }
-
 
 
 bool operator<(const std::string &lhs, const MPIntBase &rhs) {
@@ -73,11 +59,9 @@ bool operator<(const std::string &lhs, const MPIntBase &rhs) {
 }
 
 
-
 bool operator<(const long long &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) < rhs;
 }
-
 
 
 bool MPIntBase::operator>(const std::string &num) const {
@@ -85,11 +69,9 @@ bool MPIntBase::operator>(const std::string &num) const {
 }
 
 
-
 bool MPIntBase::operator>(const long long &num) const {
     return *this > MPIntBase(num);
 }
-
 
 
 bool operator>(const std::string &lhs, const MPIntBase &rhs) {
@@ -97,11 +79,9 @@ bool operator>(const std::string &lhs, const MPIntBase &rhs) {
 }
 
 
-
 bool operator>(const long long &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) > rhs;
 }
-
 
 
 bool MPIntBase::operator==(const std::string &num) const {
@@ -109,11 +89,9 @@ bool MPIntBase::operator==(const std::string &num) const {
 }
 
 
-
 bool MPIntBase::operator==(const long long &num) const {
     return *this == MPIntBase(num);
 }
-
 
 
 bool operator==(const std::string &lhs, const MPIntBase &rhs) {
@@ -121,11 +99,9 @@ bool operator==(const std::string &lhs, const MPIntBase &rhs) {
 }
 
 
-
 bool operator==(const long long &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) == rhs;
 }
-
 
 
 bool MPIntBase::operator!=(const std::string &num) const {
@@ -133,11 +109,9 @@ bool MPIntBase::operator!=(const std::string &num) const {
 }
 
 
-
 bool MPIntBase::operator!=(const long long &num) const {
     return !(*this == MPIntBase(num));
 }
-
 
 
 bool operator!=(const std::string &lhs, const MPIntBase &rhs) {
@@ -145,11 +119,9 @@ bool operator!=(const std::string &lhs, const MPIntBase &rhs) {
 }
 
 
-
 bool operator!=(const long long &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) != rhs;
 }
-
 
 
 bool MPIntBase::operator<=(const std::string &num) const {
@@ -157,11 +129,9 @@ bool MPIntBase::operator<=(const std::string &num) const {
 }
 
 
-
 bool MPIntBase::operator<=(const long long &num) const {
     return !(*this > MPIntBase(num));
 }
-
 
 
 bool operator<=(const std::string &lhs, const MPIntBase &rhs) {
@@ -169,17 +139,14 @@ bool operator<=(const std::string &lhs, const MPIntBase &rhs) {
 }
 
 
-
 bool operator<=(const long long &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) <= rhs;
 }
 
 
-
 bool MPIntBase::operator>=(const std::string &num) const {
     return !(*this < MPIntBase(num));
 }
-
 
 
 bool MPIntBase::operator>=(const long long &num) const {
@@ -190,7 +157,6 @@ bool MPIntBase::operator>=(const long long &num) const {
 bool operator>=(const std::string &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) >= rhs;
 }
-
 
 
 bool operator>=(const long long &lhs, const MPIntBase &rhs) {

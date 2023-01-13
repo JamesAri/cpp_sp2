@@ -1,7 +1,11 @@
 # ninja log v5
-2908	2995	1673629215498742679	/Users/jakub.slechta/git/cpp-sp2/cpp_sp2	6b3fcc1dd1520ceb
-2	1170	1673631129323833212	src/CMakeFiles/cpp_sp2.dir/main.cpp.o	92331822e5f46043
-0	89	1673631207806300732	build.ninja	15dd2d9d23b80436
+2	2588	1673631583199673880	src/CMakeFiles/cpp_sp2.dir/Calc.cpp.o	f7f3d6dc94ccc153
+2	59	1673632547236787438	src/CMakeFiles/cpp_sp2.dir/MPCalc.cpp.o	10ae541f10f5cac8
+1	115	1673632915641852309	build.ninja	15dd2d9d23b80436
 2	2520	1673631032116259746	src/CMakeFiles/cpp_sp2.dir/emulator/MPCalc.cpp.o	f21a7d398c4839d8
-4	3390	1673631222490513189	src/CMakeFiles/cpp_sp2.dir/MPCalc.cpp.o	10ae541f10f5cac8
-3	3612	1673631222715259819	src/CMakeFiles/cpp_sp2.dir/main.cpp.o	92331822e5f46043
+2	2566	1673632797706307709	src/CMakeFiles/cpp_sp2.dir/main.cpp.o	92331822e5f46043
+2567	2656	1673632797804113212	/Users/jakub.slechta/git/cpp-sp2/cpp_sp2	6b3fcc1dd1520ceb
+2	2597	1673633365171805795	src/CMakeFiles/cpp_sp2.dir/main.cpp.o	92331822e5f46043
+2597	2687	1673633365271730120	/Users/jakub.slechta/git/cpp-sp2/cpp_sp2	6b3fcc1dd1520ceb
+2	2532	1673633455015457209	src/CMakeFiles/cpp_sp2.dir/main.cpp.o	92331822e5f46043
+2532	2616	1673633455108853900	/Users/jakub.slechta/git/cpp-sp2/cpp_sp2	6b3fcc1dd1520ceb

@@ -1,5 +1,5 @@
-#include "emulator/MPCalc.h"
 #include "emulator/tests/tests.h"
+#include "emulator/MPCalc.h"
 
 enum MODES {
     UNLIMITED = 1,
@@ -12,7 +12,6 @@ void exitWithUsage(std::string &&invalidMode) {
     std::cerr << invalidMode << " is not a valid mode, (1 - unlimited, 2 - 32bit integer, 3 - demo)." << std::endl;
     exit(EXIT_FAILURE);
 }
-
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {

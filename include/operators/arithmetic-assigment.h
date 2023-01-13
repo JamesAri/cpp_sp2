@@ -1,8 +1,7 @@
 #ifndef CPP_SP2_ARITHMETIC_ASSIGMENT_H
 #define CPP_SP2_ARITHMETIC_ASSIGMENT_H
 
-#include "core/MPIntBase.h"
-
+#include "base/MPIntBase.h"
 
 
 MPIntBase &MPIntBase::operator+=(const MPIntBase &num) {
@@ -11,14 +10,10 @@ MPIntBase &MPIntBase::operator+=(const MPIntBase &num) {
 }
 
 
-
-
 MPIntBase &MPIntBase::operator-=(const MPIntBase &num) {
     *this = *this - num;
     return *this;
 }
-
-
 
 
 MPIntBase &MPIntBase::operator*=(const MPIntBase &num) {
@@ -27,14 +22,10 @@ MPIntBase &MPIntBase::operator*=(const MPIntBase &num) {
 }
 
 
-
-
 MPIntBase &MPIntBase::operator/=(const MPIntBase &num) {
     *this = *this / num;
     return *this;
 }
-
-
 
 
 MPIntBase &MPIntBase::operator%=(const MPIntBase &num) {
@@ -43,12 +34,10 @@ MPIntBase &MPIntBase::operator%=(const MPIntBase &num) {
 }
 
 
-
 MPIntBase &MPIntBase::operator+=(const std::string &num) {
     *this = *this + MPIntBase(num);
     return *this;
 }
-
 
 
 MPIntBase &MPIntBase::operator-=(const std::string &num) {
@@ -57,12 +46,10 @@ MPIntBase &MPIntBase::operator-=(const std::string &num) {
 }
 
 
-
 MPIntBase &MPIntBase::operator*=(const std::string &num) {
     *this = *this * MPIntBase(num);
     return *this;
 }
-
 
 
 MPIntBase &MPIntBase::operator/=(const std::string &num) {
@@ -71,12 +58,10 @@ MPIntBase &MPIntBase::operator/=(const std::string &num) {
 }
 
 
-
 MPIntBase &MPIntBase::operator%=(const std::string &num) {
     *this = *this % MPIntBase(num);
     return *this;
 }
-
 
 
 MPIntBase &MPIntBase::operator+=(const long long &num) {
@@ -91,19 +76,16 @@ MPIntBase &MPIntBase::operator-=(const long long &num) {
 }
 
 
-
 MPIntBase &MPIntBase::operator*=(const long long &num) {
     *this = *this * MPIntBase(num);
     return *this;
 }
 
 
-
 MPIntBase &MPIntBase::operator/=(const long long &num) {
     *this = *this / MPIntBase(num);
     return *this;
 }
-
 
 
 MPIntBase &MPIntBase::operator%=(const long long &num) {

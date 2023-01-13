@@ -1,7 +1,7 @@
 #ifndef CPP_SP2_ARITHEMETIC_H
 #define CPP_SP2_ARITHEMETIC_H
 
-#include "core/MPIntBase.h"
+#include "base/MPIntBase.h"
 #include "math/math.h"
 #include "util/util.h"
 #include "util/constants.h"
@@ -275,7 +275,7 @@ MPIntBase MPIntBase::operator/(const MPIntBase &num) const {
     else if (absDividend == absDivisor)
         quotient = 1;
     else {
-        quotient.value = "";    // the value is cleared as digits will be appended
+        quotient.value = "";
         MPIntBase chunk, chunkQuotient, chunkRemainder;
         size_t chunkIndex = 0;
         chunkRemainder.value = absDividend.value.substr(chunkIndex, absDivisor.value.size() - 1);
@@ -352,9 +352,8 @@ MPIntBase MPIntBase::operator%(const MPIntBase &num) const {
     }
     removeLeadingZeroes(remainder.value);
 
-    // remainder has the same sign as that of the dividend
     remainder.sign = this->sign;
-    if (remainder.value == "0")     // except if its zero
+    if (remainder.value == "0")
         remainder.sign = '+';
 
     return remainder;

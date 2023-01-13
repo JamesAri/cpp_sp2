@@ -6,7 +6,8 @@
 #include <sstream>
 #include <cmath>
 
-#include "core/core.h"
+#include "base/core.h"
+#include "emulator/exceptions/OverflowException.h"
 #include "emulator/util/concepts.h"
 
 

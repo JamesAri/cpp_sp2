@@ -1,5 +1,6 @@
 #ifndef CPP_SP2_CONCEPTS_H
 #define CPP_SP2_CONCEPTS_H
+
 #include <cstdlib>
 
 /** Used with MPInt for 'unlimited' precision */

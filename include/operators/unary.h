@@ -1,7 +1,7 @@
 #ifndef CPP_SP2_UNARY_H
 #define CPP_SP2_UNARY_H
 
-#include "core/MPIntBase.h"
+#include "base/MPIntBase.h"
 
 
 MPIntBase MPIntBase::operator+() const {

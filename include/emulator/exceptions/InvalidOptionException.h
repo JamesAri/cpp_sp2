@@ -15,7 +15,7 @@ public:
     explicit InvalidOptionException(const std::string &errMsg) : mErrMsg(errMsg) {}
 
     [[nodiscard]] const char *what() const _NOEXCEPT override {
-            return this->mErrMsg.c_str();
+        return this->mErrMsg.c_str();
     }
 };
 

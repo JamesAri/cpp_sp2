@@ -1,7 +1,7 @@
 #ifndef CPP_SP2_IO_STREAM_H
 #define CPP_SP2_IO_STREAM_H
 
-#include "core/MPIntBase.h"
+#include "base/MPIntBase.h"
 
 std::istream &operator>>(std::istream &in, MPIntBase &num) {
     std::string input;
