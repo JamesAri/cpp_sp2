@@ -54,10 +54,13 @@ void streamTests() {
 }
 
 void factorialTest() {
-    MPInt<UNLIMITED> a(100);
+    MPInt<UNLIMITED> a(24);
     a = factorial(a);
-    MPInt<4> b = a;
-    // exception !
+    try {
+        MPInt<4> b = a;
+    } catch (OverflowException &e) {
+        std::cerr << "overflow err: " << e.number << std::endl;
+    }
 }
 
 void assigmentTests() {

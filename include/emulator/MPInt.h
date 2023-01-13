@@ -7,13 +7,7 @@
 #include <cmath>
 
 #include "core/core.h"
-
-/** Used with MPInt for 'unlimited' precision */
-constexpr size_t UNLIMITED = 0;
-
-
-template<size_t S>
-concept AtLeastFourBytes = (S >= 4) || (S == UNLIMITED);
+#include "concepts.h"
 
 
 template<size_t T> requires AtLeastFourBytes<T>
@@ -268,7 +262,8 @@ void MPInt<T>::overflowCheck() {
         error = false;
     }
     if (error)
-        throw OverflowException("\nMPInt<" + std::to_string(T) + "> number overflow, value=" + this->to_string(), *this);
+        throw OverflowException("\nMPInt<" + std::to_string(T) + "> number overflow, value=" + this->to_string(),
+                                this->to_string());
 }
 
 template<size_t T>
@@ -291,13 +286,12 @@ MPInt<T> factorial(const MPInt<T> &num) {
     }
     if (num == 0)
         return MPInt<T>(1);
-    MPIntBase temp = num.to_string();
+    MPIntBase temp = num;
     MPIntBase result(1);
     while (temp != 0) {
         result *= temp;
         temp -= 1;
     }
-    std::cout << result << std::endl;
     return MPInt<T>(result);
 }
 
