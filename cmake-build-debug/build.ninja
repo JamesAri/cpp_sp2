@@ -81,6 +81,13 @@ build src/CMakeFiles/cpp_sp2.dir/main.cpp.o: CXX_COMPILER__cpp_sp2_Debug /Users/
   OBJECT_DIR = src/CMakeFiles/cpp_sp2.dir
   OBJECT_FILE_DIR = src/CMakeFiles/cpp_sp2.dir
 
+build src/CMakeFiles/cpp_sp2.dir/MPCalc.cpp.o: CXX_COMPILER__cpp_sp2_Debug /Users/jakub.slechta/git/cpp-sp2/src/MPCalc.cpp || cmake_object_order_depends_target_cpp_sp2
+  DEP_FILE = src/CMakeFiles/cpp_sp2.dir/MPCalc.cpp.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -fcolor-diagnostics -std=gnu++20
+  INCLUDES = -I/Users/jakub.slechta/git/cpp-sp2/include
+  OBJECT_DIR = src/CMakeFiles/cpp_sp2.dir
+  OBJECT_FILE_DIR = src/CMakeFiles/cpp_sp2.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target cpp_sp2
@@ -89,7 +96,7 @@ build src/CMakeFiles/cpp_sp2.dir/main.cpp.o: CXX_COMPILER__cpp_sp2_Debug /Users/
 #############################################
 # Link the executable /Users/jakub.slechta/git/cpp-sp2/cpp_sp2
 
-build /Users/jakub.slechta/git/cpp-sp2/cpp_sp2: CXX_EXECUTABLE_LINKER__cpp_sp2_Debug src/CMakeFiles/cpp_sp2.dir/main.cpp.o
+build /Users/jakub.slechta/git/cpp-sp2/cpp_sp2: CXX_EXECUTABLE_LINKER__cpp_sp2_Debug src/CMakeFiles/cpp_sp2.dir/main.cpp.o src/CMakeFiles/cpp_sp2.dir/MPCalc.cpp.o
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk
   OBJECT_DIR = src/CMakeFiles/cpp_sp2.dir
   POST_BUILD = :

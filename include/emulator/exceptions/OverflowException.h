@@ -3,7 +3,6 @@
 
 #include <string>
 #include <stdexcept>
-#include "emulator/MPInt.h"
 #include "emulator/util/concepts.h"
 
 class OverflowException : public std::runtime_error {

@@ -152,7 +152,7 @@ public:
     template<size_t U>
     requires AtLeastFourBytes<U>
     MPInt<T> &operator+=(const MPInt<U> &num) {
-        this = MPIntBase::operator+=(num);
+        *this = MPIntBase::operator+=(num);
         return *this;
     }
 
