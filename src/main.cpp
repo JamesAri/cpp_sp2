@@ -1,7 +1,7 @@
 #include "emulator/MPInt.h"
 #include "emulator/MPCalc.h"
 
-void tests() {
+void arithmeticOperatorsTest() {
     MPIntBase num1 = MPIntBase(
             "999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999");
     MPIntBase num2 = MPIntBase(
@@ -47,36 +47,46 @@ void relationalOperatorsTest() {
     assert(a < b);
 }
 
-void streamTests() {
+void streamsTest() {
     std::stringstream ss{std::to_string(INT_MAX)};
     MPInt<4> a{};
     ss >> a;
     assert(a == INT_MAX);
 }
 
-void factorialTest() {
-    MPInt<MPINT_UNLIMITED> a(24);
-    a = factorial(a);
-    try {
-        MPInt<4> b = a;
-    } catch (OverflowException &e) {
-        std::cerr << "overflow err: " << e.number << std::endl;
-    }
+void toStringTest() {
+
 }
 
-void assigmentTests() {
-    MPInt<5> a = INT_MAX;
-    MPInt<4> b = std::string("2");
-    b = a;
-    assert(b == a);
+void assigmentTest() {
+
 }
 
-////////////////////////////////////////////////
+void constructorsTest() {
+}
+
+void overflowTest() {
+}
+
+void unlimitedTest() {
+}
+
+void runTests() {
+    arithmeticOperatorsTest();
+    relationalOperatorsTest();
+    streamsTest();
+    toStringTest();
+    assigmentTest();
+    constructorsTest();
+    overflowTest();
+    unlimitedTest();
+}
 
 enum MODES {
     UNLIMITED = 1,
     INT32 = 2,
     DEMO = 3,
+    TESTS = 4,
 };
 
 
@@ -109,8 +119,10 @@ int main(int argc, char *argv[]) {
             calc32Bit.startConsole();
             break;
         case DEMO:
-            calcDemo.startConsole();
+            calcDemo.loadScript("showcase.txt");
             break;
+        case TESTS:
+            runTests();
         default:
             exitWithUsage(argv[1]);
             break;

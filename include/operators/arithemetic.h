@@ -98,7 +98,7 @@ MPIntBase MPIntBase::operator-(const MPIntBase &num) const {
         if (num.sign == '+')        // (+smaller) - (+larger) = -result
             result.sign = '-';
     }
-    add_leading_zeroes(smaller, larger.size() - smaller.size());
+    prependZeroes(smaller, larger.size() - smaller.size());
 
     result.value = "";
     int difference;
@@ -122,7 +122,7 @@ MPIntBase MPIntBase::operator-(const MPIntBase &num) const {
         }
         result.value = std::to_string(difference) + result.value;
     }
-    strip_leading_zeroes(result.value);
+    removeLeadingZeroes(result.value);
 
     if (result.value == "0")
         result.sign = '+';
@@ -174,36 +174,36 @@ MPIntBase MPIntBase::operator*(const MPIntBase &num) const {
         auto [larger, smaller] = getLargerAndSmaller(this->value, num.value);
 
         // Split the numbers in half
-        size_t half_length = larger.size() / 2;
-        auto half_length_ceil = (size_t) ceil(static_cast<double>(larger.size()) / 2.0);
+        size_t halfLength = larger.size() / 2;
+        auto halfLengthCeil = (size_t) ceil(static_cast<double>(larger.size()) / 2.0);
 
-        MPIntBase num1_high, num1_low, num2_high, num2_low;
-        num1_high = larger.substr(0, half_length);
-        num1_low = larger.substr(half_length);
-        num2_high = smaller.substr(0, half_length);
-        num2_low = smaller.substr(half_length);
+        MPIntBase num1High, num1Low, num2High, num2Low;
+        num1High = larger.substr(0, halfLength);
+        num1Low = larger.substr(halfLength);
+        num2High = smaller.substr(0, halfLength);
+        num2Low = smaller.substr(halfLength);
 
-        strip_leading_zeroes(num1_high.value);
-        strip_leading_zeroes(num1_low.value);
-        strip_leading_zeroes(num2_high.value);
-        strip_leading_zeroes(num2_low.value);
+        removeLeadingZeroes(num1High.value);
+        removeLeadingZeroes(num1Low.value);
+        removeLeadingZeroes(num2High.value);
+        removeLeadingZeroes(num2Low.value);
 
         // Recursively compute high-, low- and mid-products
-        MPIntBase prod_high, prod_mid, prod_low;
-        prod_high = num1_high * num2_high;
-        prod_low = num1_low * num2_low;
-        prod_mid = (num1_high + num1_low) * (num2_high + num2_low) - prod_high - prod_low;
+        MPIntBase prodHigh, prodMid, prodLow;
+        prodHigh = num1High * num2High;
+        prodLow = num1Low * num2Low;
+        prodMid = (num1High + num1Low) * (num2High + num2Low) - prodHigh - prodLow;
 
-        add_trailing_zeroes(prod_high.value, 2 * half_length_ceil);
-        add_trailing_zeroes(prod_mid.value, half_length_ceil);
+        appendZeroes(prodHigh.value, 2 * halfLengthCeil);
+        appendZeroes(prodMid.value, halfLengthCeil);
 
-        strip_leading_zeroes(prod_high.value);
-        strip_leading_zeroes(prod_mid.value);
-        strip_leading_zeroes(prod_low.value);
+        removeLeadingZeroes(prodHigh.value);
+        removeLeadingZeroes(prodMid.value);
+        removeLeadingZeroes(prodLow.value);
 
-        product = prod_high + prod_mid + prod_low;
+        product = prodHigh + prodMid + prodLow;
     }
-    strip_leading_zeroes(product.value);
+    removeLeadingZeroes(product.value);
 
     if (this->sign == num.sign)
         product.sign = '+';
@@ -257,51 +257,51 @@ std::tuple<MPIntBase, MPIntBase> divide(const MPIntBase &dividend, const MPIntBa
  * where n is the larger length of respective strings(Integers) provided.
  */
 MPIntBase MPIntBase::operator/(const MPIntBase &num) const {
-    MPIntBase abs_dividend = abs(*this);
-    MPIntBase abs_divisor = abs(num);
+    MPIntBase absDividend = abs(*this);
+    MPIntBase absDivisor = abs(num);
 
     if (num == 0)
         throw std::logic_error("Attempted division by zero");
-    if (abs_dividend < abs_divisor)
-        return MPIntBase(0);
+    if (absDividend < absDivisor)
+        return 0;
     if (num == 1)
         return *this;
     if (num == -1)
         return -(*this);
 
     MPIntBase quotient;
-    if (abs_dividend <= LLONG_MAX and abs_divisor <= LLONG_MAX)
-        quotient = std::stoll(abs_dividend.value) / std::stoll(abs_divisor.value);
-    else if (abs_dividend == abs_divisor)
+    if (absDividend <= LLONG_MAX and absDivisor <= LLONG_MAX)
+        quotient = std::stoll(absDividend.value) / std::stoll(absDivisor.value);
+    else if (absDividend == absDivisor)
         quotient = 1;
     else {
         quotient.value = "";    // the value is cleared as digits will be appended
-        MPIntBase chunk, chunk_quotient, chunk_remainder;
-        size_t chunk_index = 0;
-        chunk_remainder.value = abs_dividend.value.substr(chunk_index, abs_divisor.value.size() - 1);
-        chunk_index = abs_divisor.value.size() - 1;
-        while (chunk_index < abs_dividend.value.size()) {
-            chunk.value = chunk_remainder.value.append(1, abs_dividend.value[chunk_index]);
-            chunk_index++;
-            while (chunk < abs_divisor) {
+        MPIntBase chunk, chunkQuotient, chunkRemainder;
+        size_t chunkIndex = 0;
+        chunkRemainder.value = absDividend.value.substr(chunkIndex, absDivisor.value.size() - 1);
+        chunkIndex = absDivisor.value.size() - 1;
+        while (chunkIndex < absDividend.value.size()) {
+            chunk.value = chunkRemainder.value.append(1, absDividend.value[chunkIndex]);
+            chunkIndex++;
+            while (chunk < absDivisor) {
                 quotient.value += "0";
-                if (chunk_index < abs_dividend.value.size()) {
-                    chunk.value.append(1, abs_dividend.value[chunk_index]);
-                    chunk_index++;
+                if (chunkIndex < absDividend.value.size()) {
+                    chunk.value.append(1, absDividend.value[chunkIndex]);
+                    chunkIndex++;
                 } else
                     break;
             }
-            if (chunk == abs_divisor) {
+            if (chunk == absDivisor) {
                 quotient.value += "1";
-                chunk_remainder = 0;
-            } else if (chunk > abs_divisor) {
-                strip_leading_zeroes(chunk.value);
-                std::tie(chunk_quotient, chunk_remainder) = divide(chunk, abs_divisor);
-                quotient.value += chunk_quotient.value;
+                chunkRemainder = 0;
+            } else if (chunk > absDivisor) {
+                removeLeadingZeroes(chunk.value);
+                std::tie(chunkQuotient, chunkRemainder) = divide(chunk, absDivisor);
+                quotient.value += chunkQuotient.value;
             }
         }
     }
-    strip_leading_zeroes(quotient.value);
+    removeLeadingZeroes(quotient.value);
 
     if (this->sign == num.sign)
         quotient.sign = '+';
@@ -333,27 +333,24 @@ MPIntBase operator/(const long long &lhs, const MPIntBase &rhs) {
 
 
 MPIntBase MPIntBase::operator%(const MPIntBase &num) const {
-    MPIntBase abs_dividend = abs(*this);
-    MPIntBase abs_divisor = abs(num);
+    MPIntBase absDividend = abs(*this);
+    MPIntBase absDivisor = abs(num);
 
-    if (abs_divisor == 0)
+    if (absDivisor == 0)
         throw std::logic_error("Attempted division by zero");
-    if (abs_divisor == 1 or abs_divisor == abs_dividend)
+    if (absDivisor == 1 or absDivisor == absDividend)
         return MPIntBase(MPIntBase(0));
 
     MPIntBase remainder;
-    if (abs_dividend <= LLONG_MAX and abs_divisor <= LLONG_MAX)
-        remainder = std::stoll(abs_dividend.value) % std::stoll(abs_divisor.value);
-    else if (abs_dividend < abs_divisor)
-        remainder = abs_dividend;
-    else if (is_power_of_10(num.value)) { // if num is a power of 10 use optimised calculation
-        size_t no_of_zeroes = num.value.size() - 1;
-        remainder.value = abs_dividend.value.substr(abs_dividend.value.size() - no_of_zeroes);
-    } else {
-        MPIntBase quotient = abs_dividend / abs_divisor;
-        remainder = abs_dividend - quotient * abs_divisor;
+    if (absDividend <= LLONG_MAX and absDivisor <= LLONG_MAX)
+        remainder = std::stoll(absDividend.value) % std::stoll(absDivisor.value);
+    else if (absDividend < absDivisor)
+        remainder = absDividend;
+    else {
+        MPIntBase quotient = absDividend / absDivisor;
+        remainder = absDividend - quotient * absDivisor;
     }
-    strip_leading_zeroes(remainder.value);
+    removeLeadingZeroes(remainder.value);
 
     // remainder has the same sign as that of the dividend
     remainder.sign = this->sign;

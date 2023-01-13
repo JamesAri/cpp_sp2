@@ -2,26 +2,25 @@
 #define CPP_SP2_MPCALC_H
 
 #include <iostream>
-#include <string>
-#include <vector>
 #include <regex>
+#include <deque>
+#include <fstream>
+#include <filesystem>
 
 #include "MPInt.h"
 #include "emulator/util/concepts.h"
-#include "emulator/util/string-utils.h"
 #include "emulator/exceptions/InvalidOptionException.h"
-#include "emulator/util/FixedQueue.h"
 
-constexpr auto PROMPT_HEAD = " > ";
+constexpr auto PROMPT_HEAD = "> ";
 constexpr auto BANK_SIZE = 5;
 
-static const std::regex OPERATION_REGEX(std::string(R"(^([0-9]+)([+\-*/!])([0-9]*)$)"),
+static const std::regex OPERATION_REGEX(std::string(R"(^(\$[1-5]|[\-+]?[0-9]+)([+\-*/!])(\$[1-5]|[0-9]*)$)"),
                                         std::regex_constants::ECMAScript);
 
 template<size_t T> requires AtLeastFourBytes<T>
 class MPCalc {
 private:
-    FixedQueue<MPInt<T>, BANK_SIZE> bank;
+    std::deque<MPInt<T>> bank;
 public:
 
     enum class ECommands {
@@ -46,7 +45,31 @@ public:
         return ECommands::unknown;
     }
 
+    constexpr int getBankIndex(std::string const &string) {
+        if (string == "$1") return 0;
+        if (string == "$2") return 1;
+        if (string == "$3") return 2;
+        if (string == "$4") return 3;
+        if (string == "$5") return 4;
+        return -1;
+    }
+
     bool handleUserInput(std::stringstream &arguments) {
+        try {
+            return applyCommand(arguments);
+        } catch (InvalidOptionException &ex) {
+            std::cout << "calc: " << ex.what() << std::endl;
+        } catch (OverflowException &ex) {
+            std::cout << "calc: " << ex.what() << std::endl;
+        } catch (std::logic_error &ex) {
+            std::cout << "calc: logic error: " << ex.what() << std::endl;
+        } catch (...) {
+            std::cout << "calc: an unknown error occurred" << std::endl;
+        }
+    }
+
+    // TODO: function decomposition
+    bool applyCommand(std::stringstream &arguments) {
         std::string command;
         arguments >> std::ws >> command;
 
@@ -54,6 +77,7 @@ public:
 
         switch (getCommandCode(command)) {
             case ECommands::bank:
+                printBank();
                 return true;
             case ECommands::exit:
                 return false;
@@ -73,17 +97,26 @@ public:
             std::cout << "calc: Unknown command : " << command << std::endl;
             return true;
         }
-        MPInt<T> result, num1, num2;
 
+        MPInt<T> result, num1, num2;
         std::string lhs = matches[1], op = matches[2], rhs = matches[3];
 
-        num1 = lhs;
+        int index1 = getBankIndex(lhs);
+        if (bank.size() > index1) {
+            num1 = bank[index1];
+        } else {
+            num1 = lhs;
+        }
 
-        bool isUnary = true;
+        bool isUnary = rhs.empty();
 
-        if(!rhs.empty()) {
-            num2 = rhs;
-            isUnary = false;
+        if (!isUnary) {
+            int index2 = getBankIndex(rhs);
+            if (bank.size() > index2) {
+                num2 = bank[index2];
+            } else {
+                num2 = rhs;
+            }
         }
 
         if (isUnary) {
@@ -116,8 +149,24 @@ public:
                     return true;
             }
         }
+        addToBank(result);
         std::cout << result << std::endl;
         return true;
+    }
+
+    void addToBank(const MPInt<T> &num) {
+        if (bank.size() >= BANK_SIZE) {
+            bank.pop_back();
+        }
+        bank.push_front(num);
+    }
+
+    void printBank() {
+        auto index = 0;
+        for (auto &num: bank) {
+            index++;
+            std::cout << "$" << index << " = " << num << std::endl;
+        }
     }
 
     void startConsole() {
@@ -128,12 +177,31 @@ public:
             std::cout << PROMPT_HEAD;
             std::getline(std::cin, line);
             std::stringstream ss(line);
-            try {
-                run = handleUserInput(ss);
-            } catch (InvalidOptionException &ex) {
-                std::cout << "calc: " << ex.what() << std::endl;
-            }
+            run = handleUserInput(ss);
         } while (run);
+    }
+
+    void loadScript(const std::filesystem::path &path) {
+        std::ifstream stream(path);
+
+        if (!stream.good()) {
+            std::cerr << "Couldn't find file: " + path.string() << std::endl;
+            exit(EXIT_FAILURE);
+        }
+
+        bool run = true;
+        std::string line;
+
+        while (getline(stream, line) and run) {
+            std::stringstream ss(line);
+            std::cout << PROMPT_HEAD << line << "\n";
+            run = handleUserInput(ss);
+        }
+
+        stream.close();
+
+        if (run)
+            startConsole();
     }
 };
 

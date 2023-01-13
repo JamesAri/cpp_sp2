@@ -29,21 +29,21 @@ MPIntBase::MPIntBase(const long long &num) {
 MPIntBase::MPIntBase(const std::string &num) {
     if (num[0] == '+' or num[0] == '-') {
         std::string magnitude = num.substr(1);
-        if (is_valid_number(magnitude)) {
+        if (isValidNumber(magnitude)) {
             value = magnitude;
             sign = num[0];
         } else {
             throw std::invalid_argument("Expected an integer, but got: " + num);
         }
     } else {
-        if (is_valid_number(num)) {
+        if (isValidNumber(num)) {
             value = num;
             sign = '+';
         } else {
             throw std::invalid_argument("Expected an integer, but got: " + num);
         }
     }
-    strip_leading_zeroes(value);
+    removeLeadingZeroes(value);
 }
 
 #endif //CPP_SP2_CONSTRUCTORS_H

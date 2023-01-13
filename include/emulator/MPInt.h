@@ -327,7 +327,7 @@ void MPInt<T>::overflowCheck() {
         error = false;
     }
     if (error)
-        throw OverflowException("\nMPInt<" + std::to_string(T) + "> number overflow, value=" + this->to_string(),
+        throw OverflowException("MPInt<" + std::to_string(T) + "> number overflow, value=" + this->to_string(),
                                 this->to_string());
 }
 
