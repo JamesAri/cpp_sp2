@@ -33,14 +33,14 @@ MPIntBase::MPIntBase(const std::string &num) {
             value = magnitude;
             sign = num[0];
         } else {
-            throw std::invalid_argument("Expected an integer, got \"" + num + "\"");
+            throw std::invalid_argument("Expected an integer, but got: " + num);
         }
     } else {
         if (is_valid_number(num)) {
             value = num;
             sign = '+';
         } else {
-            throw std::invalid_argument("Expected an integer, got \"" + num + "\"");
+            throw std::invalid_argument("Expected an integer, but got: " + num);
         }
     }
     strip_leading_zeroes(value);

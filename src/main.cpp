@@ -97,17 +97,18 @@ int main(int argc, char *argv[]) {
     if (!(ss >> result))
         exitWithUsage(argv[1]);
 
+    auto calcUnlimited = MPCalc<MPINT_UNLIMITED>();
+    auto calc32Bit = MPCalc<4>();
+    auto calcDemo = MPCalc<MPINT_UNLIMITED>();
+
     switch (result) {
         case UNLIMITED:
-            MPCalc<MPINT_UNLIMITED> calcUnlimited{};
             calcUnlimited.startConsole();
             break;
         case INT32:
-            MPCalc<4> calc32Bit{};
             calc32Bit.startConsole();
             break;
         case DEMO:
-            MPCalc<MPINT_UNLIMITED> calcDemo{};
             calcDemo.startConsole();
             break;
         default:
