@@ -10,76 +10,76 @@ protected:
     std::string value;
     char sign;
 public:
-    MPIntBase();
+    inline MPIntBase();
 
-    MPIntBase(const MPIntBase&);
-    MPIntBase(const long long&);
-    MPIntBase(const std::string&);
+    inline MPIntBase(const MPIntBase&);
+    inline MPIntBase(const long long&);
+    inline MPIntBase(const std::string&);
 
-    MPIntBase& operator=(const MPIntBase&);
-    MPIntBase& operator=(const long long&);
-    MPIntBase& operator=(const std::string&);
+    inline MPIntBase& operator=(const MPIntBase&);
+    inline MPIntBase& operator=(const long long&);
+    inline MPIntBase& operator=(const std::string&);
 
-    MPIntBase operator+() const;
-    MPIntBase operator-() const;
+    inline MPIntBase operator+() const;
+    inline MPIntBase operator-() const;
 
-    MPIntBase operator+(const MPIntBase&) const;
-    MPIntBase operator-(const MPIntBase&) const;
-    MPIntBase operator*(const MPIntBase&) const;
-    MPIntBase operator/(const MPIntBase&) const;
-    MPIntBase operator%(const MPIntBase&) const;
-    MPIntBase operator+(const std::string&) const;
-    MPIntBase operator-(const std::string&) const;
-    MPIntBase operator*(const std::string&) const;
-    MPIntBase operator/(const std::string&) const;
-    MPIntBase operator%(const std::string&) const;
-    MPIntBase operator+(const long long&) const;
-    MPIntBase operator-(const long long&) const;
-    MPIntBase operator*(const long long&) const;
-    MPIntBase operator/(const long long&) const;
-    MPIntBase operator%(const long long&) const;
-
-
-    MPIntBase& operator+=(const MPIntBase&);
-    MPIntBase& operator-=(const MPIntBase&);
-    MPIntBase& operator*=(const MPIntBase&);
-    MPIntBase& operator/=(const MPIntBase&);
-    MPIntBase& operator%=(const MPIntBase&);
-    MPIntBase& operator+=(const std::string&);
-    MPIntBase& operator-=(const std::string&);
-    MPIntBase& operator*=(const std::string&);
-    MPIntBase& operator/=(const std::string&);
-    MPIntBase& operator%=(const std::string&);
-    MPIntBase& operator+=(const long long&);
-    MPIntBase& operator-=(const long long&);
-    MPIntBase& operator*=(const long long&);
-    MPIntBase& operator/=(const long long&);
-    MPIntBase& operator%=(const long long&);
+    inline MPIntBase operator+(const MPIntBase&) const;
+    inline MPIntBase operator-(const MPIntBase&) const;
+    inline MPIntBase operator*(const MPIntBase&) const;
+    inline MPIntBase operator/(const MPIntBase&) const;
+    inline MPIntBase operator%(const MPIntBase&) const;
+    inline MPIntBase operator+(const std::string&) const;
+    inline MPIntBase operator-(const std::string&) const;
+    inline MPIntBase operator*(const std::string&) const;
+    inline MPIntBase operator/(const std::string&) const;
+    inline MPIntBase operator%(const std::string&) const;
+    inline MPIntBase operator+(const long long&) const;
+    inline MPIntBase operator-(const long long&) const;
+    inline MPIntBase operator*(const long long&) const;
+    inline MPIntBase operator/(const long long&) const;
+    inline MPIntBase operator%(const long long&) const;
 
 
-    bool operator<(const MPIntBase&) const;
-    bool operator>(const MPIntBase&) const;
-    bool operator==(const MPIntBase&) const;
-    bool operator!=(const MPIntBase&) const;
-    bool operator<=(const MPIntBase&) const;
-    bool operator>=(const MPIntBase&) const;
-    bool operator<(const std::string&) const;
-    bool operator>(const std::string&) const;
-    bool operator==(const std::string&) const;
-    bool operator!=(const std::string&) const;
-    bool operator<=(const std::string&) const;
-    bool operator>=(const std::string&) const;
-    bool operator<(const long long&) const;
-    bool operator>(const long long&) const;
-    bool operator==(const long long&) const;
-    bool operator!=(const long long&) const;
-    bool operator<=(const long long&) const;
-    bool operator>=(const long long&) const;
+    inline MPIntBase& operator+=(const MPIntBase&);
+    inline MPIntBase& operator-=(const MPIntBase&);
+    inline MPIntBase& operator*=(const MPIntBase&);
+    inline MPIntBase& operator/=(const MPIntBase&);
+    inline MPIntBase& operator%=(const MPIntBase&);
+    inline MPIntBase& operator+=(const std::string&);
+    inline MPIntBase& operator-=(const std::string&);
+    inline MPIntBase& operator*=(const std::string&);
+    inline MPIntBase& operator/=(const std::string&);
+    inline MPIntBase& operator%=(const std::string&);
+    inline MPIntBase& operator+=(const long long&);
+    inline MPIntBase& operator-=(const long long&);
+    inline MPIntBase& operator*=(const long long&);
+    inline MPIntBase& operator/=(const long long&);
+    inline MPIntBase& operator%=(const long long&);
 
-    friend std::istream& operator>>(std::istream&, MPIntBase&);
-    friend std::ostream& operator<<(std::ostream&, const MPIntBase&);
 
-    [[nodiscard]] std::string to_string() const;
+    inline bool operator<(const MPIntBase&) const;
+    inline bool operator>(const MPIntBase&) const;
+    inline bool operator==(const MPIntBase&) const;
+    inline bool operator!=(const MPIntBase&) const;
+    inline bool operator<=(const MPIntBase&) const;
+    inline bool operator>=(const MPIntBase&) const;
+    inline bool operator<(const std::string&) const;
+    inline bool operator>(const std::string&) const;
+    inline bool operator==(const std::string&) const;
+    inline bool operator!=(const std::string&) const;
+    inline bool operator<=(const std::string&) const;
+    inline bool operator>=(const std::string&) const;
+    inline bool operator<(const long long&) const;
+    inline bool operator>(const long long&) const;
+    inline bool operator==(const long long&) const;
+    inline bool operator!=(const long long&) const;
+    inline bool operator<=(const long long&) const;
+    inline bool operator>=(const long long&) const;
+
+    inline friend std::istream& operator>>(std::istream&, MPIntBase&);
+    inline friend std::ostream& operator<<(std::ostream&, const MPIntBase&);
+
+    inline std::string to_string() const;
 };
 
 #endif //CPP_SP2_MPINTBASE_H

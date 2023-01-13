@@ -3,7 +3,7 @@
 
 #include <string>
 
-void removeLeadingZeroes(std::string &num) {
+inline void removeLeadingZeroes(std::string &num) {
     size_t i;
     for (i = 0; i < num.size(); i++) {
         if (num[i] != '0')
@@ -17,17 +17,17 @@ void removeLeadingZeroes(std::string &num) {
 }
 
 
-void prependZeroes(std::string &num, size_t num_zeroes) {
+inline void prependZeroes(std::string &num, size_t num_zeroes) {
     num = std::string(num_zeroes, '0') + num;
 }
 
 
-void appendZeroes(std::string &num, size_t num_zeroes) {
+inline void appendZeroes(std::string &num, size_t num_zeroes) {
     num += std::string(num_zeroes, '0');
 }
 
 
-std::tuple<std::string, std::string>
+inline std::tuple<std::string, std::string>
 getLargerAndSmaller(const std::string &num1, const std::string &num2) {
     std::string larger, smaller;
     if (num1.size() > num2.size() || (num1.size() == num2.size() && num1 > num2)) {
@@ -42,7 +42,7 @@ getLargerAndSmaller(const std::string &num1, const std::string &num2) {
 }
 
 
-bool isValidNumber(const std::string &num) {
+inline bool isValidNumber(const std::string &num) {
     for (const auto digit: num) { // Would use std::ranges::all_of(), but Apple Clang..
         if (digit < '0' || digit > '9')
             return false;

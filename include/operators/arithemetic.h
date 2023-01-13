@@ -57,12 +57,12 @@ MPIntBase MPIntBase::operator+(const long long &num) const {
 }
 
 
-MPIntBase operator+(const std::string &lhs, const MPIntBase &rhs) {
+inline MPIntBase operator+(const std::string &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) + rhs;
 }
 
 
-MPIntBase operator+(const long long &lhs, const MPIntBase &rhs) {
+inline MPIntBase operator+(const long long &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) + rhs;
 }
 
@@ -141,12 +141,12 @@ MPIntBase MPIntBase::operator-(const long long &num) const {
 }
 
 
-MPIntBase operator-(const std::string &lhs, const MPIntBase &rhs) {
+inline MPIntBase operator-(const std::string &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) - rhs;
 }
 
 
-MPIntBase operator-(const long long &lhs, const MPIntBase &rhs) {
+inline MPIntBase operator-(const long long &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) - rhs;
 }
 
@@ -224,17 +224,17 @@ MPIntBase MPIntBase::operator*(const long long &num) const {
 }
 
 
-MPIntBase operator*(const std::string &lhs, const MPIntBase &rhs) {
+inline MPIntBase operator*(const std::string &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) * rhs;
 }
 
 
-MPIntBase operator*(const long long &lhs, const MPIntBase &rhs) {
+inline MPIntBase operator*(const long long &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) * rhs;
 }
 
 
-std::tuple<MPIntBase, MPIntBase> divide(const MPIntBase &dividend, const MPIntBase &divisor) {
+inline std::tuple<MPIntBase, MPIntBase> divide(const MPIntBase &dividend, const MPIntBase &divisor) {
     MPIntBase quotient, remainder, temp;
 
     temp = divisor;
@@ -322,12 +322,12 @@ MPIntBase MPIntBase::operator/(const long long &num) const {
 }
 
 
-MPIntBase operator/(const std::string &lhs, const MPIntBase &rhs) {
+inline MPIntBase operator/(const std::string &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) / rhs;
 }
 
 
-MPIntBase operator/(const long long &lhs, const MPIntBase &rhs) {
+inline MPIntBase operator/(const long long &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) / rhs;
 }
 
@@ -370,12 +370,12 @@ MPIntBase MPIntBase::operator%(const long long &num) const {
 }
 
 
-MPIntBase operator%(const std::string &lhs, const MPIntBase &rhs) {
+inline MPIntBase operator%(const std::string &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) % rhs;
 }
 
 
-MPIntBase operator%(const long long &lhs, const MPIntBase &rhs) {
+inline MPIntBase operator%(const long long &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) % rhs;
 }
 

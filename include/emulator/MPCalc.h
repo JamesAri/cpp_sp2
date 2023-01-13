@@ -206,5 +206,4 @@ public:
     };
 };
 
-
 #endif //CPP_SP2_MPCALC_H

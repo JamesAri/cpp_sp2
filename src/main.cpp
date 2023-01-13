@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
     if (argc != 2) {
         std::cerr << "Invalid argument. Modes: 1 - unlimited, 2 - 32bit integer, 3 - demo\n"
                      "Usage: <executable> <mode>" << std::endl;
+        exit(EXIT_FAILURE);
     }
 
     std::stringstream ss(argv[1]);
@@ -30,12 +31,15 @@ int main(int argc, char *argv[]) {
 
     switch (result) {
         case UNLIMITED:
+            std::cout << "MPCalc Unlimited - operators: +, -, *, / or !" << std::endl;
             calcUnlimited.startConsole();
             break;
         case INT32:
+            std::cout << "MPCalc 32bit - operators: +, -, *, / or !" << std::endl;
             calc32Bit.startConsole();
             break;
         case DEMO:
+            std::cout << "MPCalc Showcase - operators: +, -, *, / or !" << std::endl;
             calcDemo.loadScript("showcase.txt");
             break;
         case TESTS:

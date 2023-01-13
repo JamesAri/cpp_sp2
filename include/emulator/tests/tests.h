@@ -5,6 +5,12 @@
 
 // TODO: some negative tests
 
+/* Note:
+ * Ze zadani: Výsledná přesnost (výše uvednená "maximální velikost") bude volena jako největší ze vstupních...
+ * U MPInt<4>... = MPInt<5>... jsem si nebyl jisty zda vracet maximum (5), ci nechat puvodni velikost (4),
+ * jak je tomu obvykle zvykem. Nakonec jsem zvolil to druhe.
+*/
+
 void arithmeticOperatorsTest() {
     MPInt<MPINT_UNLIMITED> num1(3);
     MPInt<MPINT_UNLIMITED> num2(10);

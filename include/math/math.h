@@ -3,7 +3,7 @@
 
 #include "base/MPIntBase.h"
 
-MPIntBase abs(const MPIntBase &num) {
+inline MPIntBase abs(const MPIntBase &num) {
     return num < 0 ? -num : num;
 }
 

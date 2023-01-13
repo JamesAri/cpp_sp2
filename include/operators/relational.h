@@ -54,12 +54,12 @@ bool MPIntBase::operator<(const long long &num) const {
 }
 
 
-bool operator<(const std::string &lhs, const MPIntBase &rhs) {
+inline bool operator<(const std::string &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) < rhs;
 }
 
 
-bool operator<(const long long &lhs, const MPIntBase &rhs) {
+inline bool operator<(const long long &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) < rhs;
 }
 
@@ -74,12 +74,12 @@ bool MPIntBase::operator>(const long long &num) const {
 }
 
 
-bool operator>(const std::string &lhs, const MPIntBase &rhs) {
+inline bool operator>(const std::string &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) > rhs;
 }
 
 
-bool operator>(const long long &lhs, const MPIntBase &rhs) {
+inline bool operator>(const long long &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) > rhs;
 }
 
@@ -94,12 +94,12 @@ bool MPIntBase::operator==(const long long &num) const {
 }
 
 
-bool operator==(const std::string &lhs, const MPIntBase &rhs) {
+inline bool operator==(const std::string &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) == rhs;
 }
 
 
-bool operator==(const long long &lhs, const MPIntBase &rhs) {
+inline bool operator==(const long long &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) == rhs;
 }
 
@@ -114,12 +114,12 @@ bool MPIntBase::operator!=(const long long &num) const {
 }
 
 
-bool operator!=(const std::string &lhs, const MPIntBase &rhs) {
+inline bool operator!=(const std::string &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) != rhs;
 }
 
 
-bool operator!=(const long long &lhs, const MPIntBase &rhs) {
+inline bool operator!=(const long long &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) != rhs;
 }
 
@@ -134,12 +134,12 @@ bool MPIntBase::operator<=(const long long &num) const {
 }
 
 
-bool operator<=(const std::string &lhs, const MPIntBase &rhs) {
+inline bool operator<=(const std::string &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) <= rhs;
 }
 
 
-bool operator<=(const long long &lhs, const MPIntBase &rhs) {
+inline bool operator<=(const long long &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) <= rhs;
 }
 
@@ -154,12 +154,12 @@ bool MPIntBase::operator>=(const long long &num) const {
 }
 
 
-bool operator>=(const std::string &lhs, const MPIntBase &rhs) {
+inline bool operator>=(const std::string &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) >= rhs;
 }
 
 
-bool operator>=(const long long &lhs, const MPIntBase &rhs) {
+inline bool operator>=(const long long &lhs, const MPIntBase &rhs) {
     return MPIntBase(lhs) >= rhs;
 }
 

@@ -31,11 +31,6 @@ public:
 
     void printDebugInfo();
 
-    /* Note:
-     * Ze zadani: Výsledná přesnost (výše uvednená "maximální velikost") bude volena jako největší ze vstupních...
-     * zde jsem si nebyl jisty zda vracet maximum, ci nechat puvodni velikost, jak je tomu obvykle zvykem.
-     * Zde jsem zvolil to druhe.
-    */
     template<size_t U>
     requires AtLeastFourBytes<U>
     MPInt(const MPInt<U> &num) {
