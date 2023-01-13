@@ -1,18 +1,5 @@
 # ninja log v5
-1144	1249	1673607765571038942	/Users/jakub.slechta/git/cpp-sp2/cpp_sp2	6b3fcc1dd1520ceb
-2	1144	1673607765464247059	src/CMakeFiles/cpp_sp2.dir/main.cpp.o	92331822e5f46043
-0	82	1673608731707206863	build.ninja	15dd2d9d23b80436
-3	1695	1673608822226115101	src/CMakeFiles/cpp_sp2.dir/main.cpp.o	92331822e5f46043
-1695	1795	1673608822332140863	/Users/jakub.slechta/git/cpp-sp2/cpp_sp2	6b3fcc1dd1520ceb
-1	1139	1673609022236761108	src/CMakeFiles/cpp_sp2.dir/main.cpp.o	92331822e5f46043
-1139	1211	1673609022311902320	/Users/jakub.slechta/git/cpp-sp2/cpp_sp2	6b3fcc1dd1520ceb
-3	1109	1673609028991386512	src/CMakeFiles/cpp_sp2.dir/main.cpp.o	92331822e5f46043
-1109	1181	1673609029067505833	/Users/jakub.slechta/git/cpp-sp2/cpp_sp2	6b3fcc1dd1520ceb
-2	1099	1673609037494531253	src/CMakeFiles/cpp_sp2.dir/main.cpp.o	92331822e5f46043
-1099	1170	1673609037568976357	/Users/jakub.slechta/git/cpp-sp2/cpp_sp2	6b3fcc1dd1520ceb
-3	2296	1673609051993945403	src/CMakeFiles/cpp_sp2.dir/main.cpp.o	92331822e5f46043
-2296	2402	1673609052107722148	/Users/jakub.slechta/git/cpp-sp2/cpp_sp2	6b3fcc1dd1520ceb
-2	1098	1673609059875830577	src/CMakeFiles/cpp_sp2.dir/main.cpp.o	92331822e5f46043
-1098	1173	1673609059953903808	/Users/jakub.slechta/git/cpp-sp2/cpp_sp2	6b3fcc1dd1520ceb
-2	1138	1673609678547998393	src/CMakeFiles/cpp_sp2.dir/main.cpp.o	92331822e5f46043
-1139	1210	1673609678623981638	/Users/jakub.slechta/git/cpp-sp2/cpp_sp2	6b3fcc1dd1520ceb
+1368	1441	1673613384871109869	/Users/jakub.slechta/git/cpp-sp2/cpp_sp2	6b3fcc1dd1520ceb
+3	1368	1673613384792469117	src/CMakeFiles/cpp_sp2.dir/main.cpp.o	92331822e5f46043
+1	87	1673613893188347281	build.ninja	15dd2d9d23b80436
+0	89	1673613893188347281	build.ninja	15dd2d9d23b80436

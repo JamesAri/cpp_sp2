@@ -7,7 +7,7 @@
 #include <cmath>
 
 #include "core/core.h"
-#include "concepts.h"
+#include "emulator/util/concepts.h"
 
 
 template<size_t T> requires AtLeastFourBytes<T>
@@ -20,11 +20,11 @@ private:
     void overflowCheck();
 
     /** The count of available numbers */
-    MPIntBase RANGE = T ? MPIntBase(pow(2, 8 * T)) : UNLIMITED;
+    MPIntBase RANGE = T ? MPIntBase(pow(2, 8 * T)) : MPINT_UNLIMITED;
     /** Upper limit, this range includes zero, thus the additional minus one */
-    MPIntBase MAX_SIZE = T ? MPIntBase(pow(2, 8 * T - 1) - 1) : UNLIMITED;
+    MPIntBase MAX_SIZE = T ? MPIntBase(pow(2, 8 * T - 1) - 1) : MPINT_UNLIMITED;
     /** Lower limit */
-    MPIntBase MIN_SIZE = T ? -MPIntBase(pow(2, 8 * T - 1)) : UNLIMITED;
+    MPIntBase MIN_SIZE = T ? -MPIntBase(pow(2, 8 * T - 1)) : MPINT_UNLIMITED;
 public:
     using MPIntBase::MPIntBase;
 
@@ -315,7 +315,7 @@ MPInt<T> operator%(const long long &lhs, const MPInt<T> &rhs) {
 template<size_t T>
 requires AtLeastFourBytes<T>
 void MPInt<T>::overflowCheck() {
-    if (T == UNLIMITED) return;
+    if (T == MPINT_UNLIMITED) return;
     bool error = true;
     if (*this >= RANGE) {
         MPIntBase::operator%=(RANGE);

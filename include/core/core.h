@@ -10,7 +10,7 @@
 #include "operators/unary.h"
 #include "operators/relational.h"
 #include "conversion/conversion.h"
-#include "util/OverflowException.h"
+#include "emulator/exceptions/OverflowException.h"
 
 
 #endif //CPP_SP2_CORE_H
