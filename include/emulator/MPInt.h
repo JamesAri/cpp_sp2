@@ -240,8 +240,73 @@ public:
         in >> input;
         num = MPIntBase(input);
         return in;
-    };
+    }
 };
+
+// =============================================================================== //
+//                             MPInt RHS ASSIGNMENTS                               //
+// =============================================================================== //
+
+template<size_t T>
+requires AtLeastFourBytes<T>
+MPInt<T> operator+(const std::string &lhs, const MPInt<T> &rhs) {
+    return MPInt<T>(lhs) + rhs;
+}
+
+template<size_t T>
+requires AtLeastFourBytes<T>
+MPInt<T> operator+(const long long &lhs, const MPInt<T> &rhs) {
+    return MPInt<T>(lhs) + rhs;
+}
+
+template<size_t T>
+requires AtLeastFourBytes<T>
+MPInt<T> operator-(const std::string &lhs, const MPInt<T> &rhs) {
+    return MPInt<T>(lhs) - rhs;
+}
+
+template<size_t T>
+requires AtLeastFourBytes<T>
+MPInt<T> operator-(const long long &lhs, const MPInt<T> &rhs) {
+    return MPInt<T>(lhs) - rhs;
+}
+
+template<size_t T>
+requires AtLeastFourBytes<T>
+MPInt<T> operator*(const std::string &lhs, const MPInt<T> &rhs) {
+    return MPInt<T>(lhs) * rhs;
+}
+
+template<size_t T>
+requires AtLeastFourBytes<T>
+MPInt<T> operator*(const long long &lhs, const MPInt<T> &rhs) {
+    return MPInt<T>(lhs) * rhs;
+}
+
+template<size_t T>
+requires AtLeastFourBytes<T>
+MPInt<T> operator/(const std::string &lhs, const MPInt<T> &rhs) {
+    return MPInt<T>(lhs) / rhs;
+}
+
+template<size_t T>
+requires AtLeastFourBytes<T>
+MPInt<T> operator/(const long long &lhs, const MPInt<T> &rhs) {
+    return MPInt<T>(lhs) / rhs;
+}
+
+template<size_t T>
+requires AtLeastFourBytes<T>
+MPInt<T> operator%(const std::string &lhs, const MPInt<T> &rhs) {
+    return MPInt<T>(lhs) % rhs;
+}
+
+template<size_t T>
+requires AtLeastFourBytes<T>
+MPInt<T> operator%(const long long &lhs, const MPInt<T> &rhs) {
+    return MPInt<T>(lhs) % rhs;
+}
+
 
 // =============================================================================== //
 //                                     UTILS                                       //
