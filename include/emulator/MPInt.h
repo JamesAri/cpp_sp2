@@ -5,8 +5,8 @@
 #include <iostream>
 #include <sstream>
 #include <cmath>
-#include "core.h"
-#include "util.h"
+
+#include "core/core.h"
 
 /** Used with MPInt for 'unlimited' precision */
 constexpr size_t UNLIMITED = 0;
@@ -21,16 +21,16 @@ class MPInt : public MPIntBase {
 private:
     template<size_t U> requires AtLeastFourBytes<U>
     friend
-    class MPIntWrapper;
+    class MPInt;
 
     void overflowCheck();
 
     /** The count of available numbers */
-    MPIntBase RANGE = MPIntBase(pow(2, 8 * T));
+    MPIntBase RANGE = T ? MPIntBase(pow(2, 8 * T)) : UNLIMITED;
     /** Upper limit, this range includes zero, thus the additional minus one */
-    MPIntBase MAX_SIZE = MPIntBase(pow(2, 8 * T - 1) - 1);
+    MPIntBase MAX_SIZE = T ? MPIntBase(pow(2, 8 * T - 1) - 1) : UNLIMITED;
     /** Lower limit */
-    MPIntBase MIN_SIZE = -MPIntBase(pow(2, 8 * T - 1));
+    MPIntBase MIN_SIZE = T ? -MPIntBase(pow(2, 8 * T - 1)) : UNLIMITED;
 public:
     using MPIntBase::MPIntBase;
 
@@ -40,20 +40,20 @@ public:
      * Ze zadani: Výsledná přesnost (výše uvednená "maximální velikost") bude volena jako největší ze vstupních...
      * zde jsem si nebyl jisty zda vracet maximum, ci nechat puvodni velikost, jak je tomu obvykle zvykem.
      * Zde jsem zvolil to druhe.
-     * Checks for overflow: if U's value is larger than T's maximum, exception is thrown. */
+    */
     template<size_t U>
     requires AtLeastFourBytes<U>
-    explicit MPInt(const MPInt<U> &num) {
+    MPInt(const MPInt<U> &num) {
         value = num.value;
         sign = num.sign;
         overflowCheck();
     };
 
-    explicit MPInt(const MPIntBase &num) : MPIntBase(num) { overflowCheck(); };
+    MPInt(const MPIntBase &num) : MPIntBase(num) { overflowCheck(); };
 
-    explicit MPInt(const long long &num) : MPIntBase(num) { overflowCheck(); };
+    MPInt(const long long &num) : MPIntBase(num) { overflowCheck(); };
 
-    explicit MPInt(const std::string &num) : MPIntBase(num) { overflowCheck(); };
+    MPInt(const std::string &num) : MPIntBase(num) { overflowCheck(); };
 
     template<size_t U>
     requires AtLeastFourBytes<U>
@@ -241,13 +241,35 @@ public:
         return *this;
     }
 
-    friend std::istream& operator>>(std::istream& in, MPInt<T>& num) {
+    friend std::istream &operator>>(std::istream &in, MPInt<T> &num) {
         std::string input;
         in >> input;
         num = MPIntBase(input);
         return in;
     };
 };
+
+// =============================================================================== //
+//                                     UTILS                                       //
+// =============================================================================== //
+
+template<size_t T>
+requires AtLeastFourBytes<T>
+void MPInt<T>::overflowCheck() {
+    if (T == UNLIMITED) return;
+    bool error = true;
+    if (*this >= RANGE) {
+        MPIntBase::operator%=(RANGE);
+    } else if (*this > MAX_SIZE) {
+        MPIntBase::operator-=(RANGE);
+    } else if (*this < MIN_SIZE) {
+        MPIntBase::operator+=(RANGE);
+    } else {
+        error = false;
+    }
+    if (error)
+        throw OverflowException("\nMPInt<" + std::to_string(T) + "> number overflow, value=" + this->to_string(), *this);
+}
 
 template<size_t T>
 requires AtLeastFourBytes<T>
@@ -263,21 +285,20 @@ void MPInt<T>::printDebugInfo() {
 
 template<size_t T>
 requires AtLeastFourBytes<T>
-void MPInt<T>::overflowCheck() {
-    if (T == UNLIMITED) return;
-    bool error = true;
-    if (this->value >= RANGE) {
-        MPIntBase::operator%=(RANGE);
-    } else if (this->value > MAX_SIZE) {
-        MPIntBase::operator-=(RANGE);
-    } else if (this->value < MIN_SIZE) {
-        MPIntBase::operator+=(RANGE);
-    } else {
-        error = false;
+MPInt<T> factorial(const MPInt<T> &num) {
+    if (num < 0) {
+        throw std::logic_error("Factorial of Negative Integer is not defined.");
     }
-    if (error)
-        throw OverflowException("\nMPInt<" + std::to_string(T) + "> number overflow, value=" + this->to_string());
+    if (num == 0)
+        return MPInt<T>(1);
+    MPIntBase temp = num.to_string();
+    MPIntBase result(1);
+    while (temp != 0) {
+        result *= temp;
+        temp -= 1;
+    }
+    std::cout << result << std::endl;
+    return MPInt<T>(result);
 }
-
 
 #endif //CPP_SP2_MPINT_H

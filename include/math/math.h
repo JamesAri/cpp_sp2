@@ -1,7 +1,7 @@
 #ifndef CPP_SP2_MATH_H
 #define CPP_SP2_MATH_H
 
-#include "MPIntBase.h"
+#include "core/MPIntBase.h"
 
 MPIntBase abs(const MPIntBase &num) {
     return num < 0 ? -num : num;

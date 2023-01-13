@@ -3,13 +3,14 @@
 
 #include <string>
 #include <stdexcept>
+#include "emulator/MPInt.h"
 
 class OverflowException : public std::runtime_error {
 public:
     OverflowException() : std::runtime_error("Number overflow") {}
 
-    OverflowException(std::string &msg) : std::runtime_error(msg.c_str()) {}
-    OverflowException(std::string &&msg) : std::runtime_error(msg.c_str()) {}
+    explicit OverflowException(std::string &msg) : std::runtime_error(msg.c_str()) {}
+    explicit OverflowException(std::string &&msg) : std::runtime_error(msg.c_str()) {}
 };
 
 #endif //CPP_SP2_OVERFLOWEXCEPTION_H

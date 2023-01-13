@@ -110,7 +110,8 @@
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
-				1
+				1,
+				2
 			]
 		}
 	],
@@ -124,7 +125,12 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "include/emulator/MPIntWrapper.h",
+			"path" : "include/emulator/MPInt.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "include/emulator/math/math.h",
 			"sourceGroupIndex" : 1
 		}
 	],

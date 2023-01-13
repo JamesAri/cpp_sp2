@@ -1,7 +1,7 @@
 #ifndef CPP_SP2_ARITHMETIC_ASSIGMENT_H
 #define CPP_SP2_ARITHMETIC_ASSIGMENT_H
 
-#include "MPIntBase.h"
+#include "core/MPIntBase.h"
 
 
 

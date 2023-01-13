@@ -13,8 +13,8 @@ public:
     MPIntBase();
 
     MPIntBase(const MPIntBase&);
-    explicit MPIntBase(const long long&);
-    explicit MPIntBase(const std::string&);
+    MPIntBase(const long long&);
+    MPIntBase(const std::string&);
 
     MPIntBase& operator=(const MPIntBase&);
     MPIntBase& operator=(const long long&);

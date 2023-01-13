@@ -1,7 +1,7 @@
 #ifndef CPP_SP2_RELATIONAL_H
 #define CPP_SP2_RELATIONAL_H
 
-#include "MPIntBase.h"
+#include "core/MPIntBase.h"
 #include "operators/unary.h"
  
 
@@ -185,7 +185,6 @@ bool MPIntBase::operator>=(const std::string &num) const {
 bool MPIntBase::operator>=(const long long &num) const {
     return !(*this < MPIntBase(num));
 }
-
 
 
 bool operator>=(const std::string &lhs, const MPIntBase &rhs) {

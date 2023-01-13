@@ -1,7 +1,7 @@
 #ifndef CPP_SP2_ARITHEMETIC_H
 #define CPP_SP2_ARITHEMETIC_H
 
-#include "MPIntBase.h"
+#include "core/MPIntBase.h"
 #include "math/math.h"
 #include "util/util.h"
 #include "util/constants.h"

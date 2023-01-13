@@ -1,7 +1,7 @@
 #ifndef CPP_SP2_CONSTRUCTORS_H
 #define CPP_SP2_CONSTRUCTORS_H
 
-#include "MPIntBase.h"
+#include "core/MPIntBase.h"
 #include "util/util.h"
 
 

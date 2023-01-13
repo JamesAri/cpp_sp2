@@ -1,4 +1,3 @@
-//#include "core.h"
 #include "emulator/MPInt.h"
 
 void tests() {
@@ -48,21 +47,32 @@ void relationalOperatorsTest() {
 }
 
 void streamTests() {
-    std::stringstream ss{"2147483647"};
+    std::stringstream ss{std::to_string(INT_MAX)};
     MPInt<4> a{};
     ss >> a;
-    assert(a == "2147483647");
+    assert(a == INT_MAX);
 }
 
+void factorialTest() {
+    MPInt<UNLIMITED> a(100);
+    a = factorial(a);
+    MPInt<4> b = a;
+    // exception !
+}
+
+void assigmentTests() {
+    MPInt<5> a = INT_MAX;
+    MPInt<4> b = std::string("2");
+    b = a;
+    assert(b == a);
+}
+
+
 int main() {
-    tests();
-    relationalOperatorsTest();
-    streamTests();
-    ///////////////////////////////
-    auto a2 = MPInt<4>();
-    std::cout << a2 << std::endl;
-    auto a = MPInt<4>("2147483646");
-    a += -2;
-    std::cout << "OK:" << a << std::endl;
+//    tests();
+//    relationalOperatorsTest();
+//    streamTests();
+//    assigmentTests();
+//    factorialTest();
     return 0;
 }

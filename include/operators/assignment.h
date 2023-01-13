@@ -1,7 +1,7 @@
 #ifndef CPP_SP2_ASSIGNMENT_H
 #define CPP_SP2_ASSIGNMENT_H
 
-#include "MPIntBase.h"
+#include "core/MPIntBase.h"
 
 
 
